@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">Hitch A Lift</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login__choice">Login_ChoiceActivity</string>
+    <string name="title_activity_home__screen_">Home_Screen_Activity</string>
+    <string name="title_activity_journey__list">Journey_ListActivity</string>
+
+
+
+    <string-array name="country">
+        <item>Antrim</item>
+        <item>Armagh</item>
+        <item>Carlow</item>
+        <item>Clare</item>
+        <item>Cavan</item>
+        <item>Cork</item>
+        <item>Derry</item>
+        <item>Donegal</item>
+        <item>Down</item>
+        <item>Dublin</item>
+        <item>Fermanagh</item>
+        <item>Galway</item>
+        <item>Kerry</item>
+        <item>Kildare</item>
+        <item>Kilkenny</item>
+        <item>Laois</item>
+        <item>Leitrim</item>
+        <item>Limerick</item>
+        <item>Longford</item>
+        <item>Louth</item>
+        <item>Mayo</item>
+        <item>Meath</item>
+        <item>Monaghan</item>
+        <item>Offaly</item>
+        <item>Roscommon</item>
+        <item>Sligo</item>
+        <item>Tipperary</item>
+        <item>Tyrone</item>
+        <item>Waterford</item>
+        <item>Westmeath</item>
+        <item>Wexford</item>
+        <item>Wicklow</item>
+    </string-array>
+
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_home__user__screen_">Register Account</string>
+    <string name="To">To</string>
+    <string name="From">From</string>
+    <string name="Date">Date</string>
+</resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "666809066019",
+    "firebase_url": "https://myapplicationhitchalift.firebaseio.com",
+    "project_id": "myapplicationhitchalift",
+    "storage_bucket": "myapplicationhitchalift.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666809066019:android:76016e605ece0893",
+        "android_client_info": {
+          "package_name": "ie.wit.screens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666809066019-3btb5jimidlq0e2896e34ogb156cppeq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ie.wit.screens",
+            "certificate_hash": "69847f848248e5357e9dd67b4b1b365a0af4e65f"
+          }
+        },
+        {
+          "client_id": "666809066019-dk1p4qi4gosv1bdc28ib02uv5ubttfn9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4i6cNrcj7lKVbDu5ECO_4JpbscyxQAUw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666809066019-dk1p4qi4gosv1bdc28ib02uv5ubttfn9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
