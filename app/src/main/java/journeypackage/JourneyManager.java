@@ -39,7 +39,7 @@ public class JourneyManager  {
     }
 
     public List<Journey> getJourneyList() {
-        return journeyList;
+        return this.journeyList;
     }
 //        Journey journey = j;
 //        int index = search(journey);
