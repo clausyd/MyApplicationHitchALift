@@ -21,20 +21,17 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import io.realm.Realm;
 import journeypackage.Journey;
 import journeypackage.JourneyManager;
 
 public class Journey_ListActivity extends AppCompatActivity {
 
     Journey j;
-
-
-
     ListView listView;
-    JourneyManager journeyManager = new JourneyManager();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +42,16 @@ public class Journey_ListActivity extends AppCompatActivity {
         listView = findViewById(R.id.journeyList);
 
         Intent intent = getIntent();
-        j = (Journey) intent.getSerializableExtra("Journey");
-        String from = j.startCounty;
-        String to = j.finishCounty;
-        String date = j.date;
-        List<Journey> tempJourneyList;
-        tempJourneyList = journeyManager.getJourneyList();
+        Bundle bundle = intent.getExtras();
+        String from = bundle.getString("From");
+        String to = bundle.getString("To");
+        String date = bundle.getString("Date");
 
+        Realm realm = Realm.getDefaultInstance();
 
-        JourneyAdapter adapter = new JourneyAdapter(this, (ArrayList<Journey>) tempJourneyList);
-        listView.setAdapter(adapter);
+        ArrayList list = new ArrayList((Collection) realm.where(Journey.class).equalTo("FROM",from ).and().equalTo("TO", to).and().equalTo("DATE", date).findAll() );
+       JourneyAdapter adapter = new JourneyAdapter(this, (ArrayList<Journey>) list);
+       listView.setAdapter(adapter);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
