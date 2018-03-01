@@ -1,7 +1,5 @@
 package journeypackage;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,15 +15,14 @@ import personpackage.Person;
  * Created by clausyd on 14/02/18.
  */
 
-public class JourneyManager  {
+public class JourneyManager {
 
-    public ArrayList<Journey> journeyList;
+    public List<Journey> journeyList;
 
 
 
 
     public JourneyManager() {
-
         journeyList = new ArrayList<>();
 
     }

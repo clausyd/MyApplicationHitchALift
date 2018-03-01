@@ -1,5 +1,6 @@
 package ie.wit.screens;
 
+import android.app.Application;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,28 +19,13 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import journeypackage.Journey;
 import journeypackage.JourneyManager;
 
 public class Home_Screen_Activity extends AppCompatActivity {
 
-
-    JourneyManager journeyManager = new JourneyManager();
-    String Antrim;
-    String Armagh;
-    String Carlow;
-    String Clare;
-    String   Cavan;
-    String Cork;
-    String Derry;
-    String Donegal;
-    String Down;
-    String Dublin;
-    String Fermanagh;
-    String Galway;
-    String Kerry;
-    String Kildare;
-    String Kilkenny;
 
     AutoCompleteTextView autoCompleteTextView1;
     AutoCompleteTextView autoCompleteTextView2;
@@ -57,6 +43,8 @@ public class Home_Screen_Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         // YouTube. (2018). Android Studio Tutorial - 10 - Working with AutoCompleteTextView. [online] Available at: https://www.youtube.com/watch?v=dEhE9MMR7mg&list=PL70y70C-OGAZucFOcbWyTmXZmB4amoHP3&index=1 [Accessed 7 Feb. 2018].        autoCompleteTextView1 = findViewById(R.id.to);
         autoCompleteTextView1 = findViewById(R.id.from);
         autoCompleteTextView2 = findViewById(R.id.to);
@@ -66,10 +54,7 @@ public class Home_Screen_Activity extends AppCompatActivity {
         autoCompleteTextView1.setAdapter(adapter);
         autoCompleteTextView2.setAdapter(adapter);
 
-        journeyManager.addJourney(new Journey(Kilkenny, Dublin, 2018 ));
-        journeyManager.addJourney(new Journey(Kerry, Kildare, 2018 ));
-        journeyManager.addJourney(new Journey(Galway, Clare, 2018 ));
-        journeyManager.addJourney(new Journey(Cork, Carlow, 2018 ));
+
 
         search = findViewById(R.id.search);
 
@@ -83,9 +68,9 @@ public class Home_Screen_Activity extends AppCompatActivity {
                 from = autoCompleteTextView1.getText().toString();
                 to = autoCompleteTextView2.getText().toString();
                 d =Integer.parseInt( dateSelector.getText().toString());
-                Journey j = new Journey(from, to, d);
+                //Journey j = new Journey(from, to, d);
                 Intent myIntent = new Intent(view.getContext(), Journey_ListActivity.class);
-                myIntent.putExtra("Journey", j);
+                //myIntent.putExtra("Journey", j);
                 startActivityForResult(myIntent, 0);
             }
         });

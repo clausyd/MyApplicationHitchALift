@@ -11,25 +11,58 @@ import android.os.Parcelable;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 
-public class Person implements Serializable {
-    public String firstName;
+public class Person extends RealmObject implements Serializable {
+
+
+
+    @PrimaryKey
+    private String email;
+    private String firstName;
     public String surname;
     public String password;
-    public String email;
+
+    public Person()
+    {}
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+
 
     public String getEmail() {
         return email;
     }
 
-    public Person(String email, String firstname, String surname, String password)
-    {
-        this.firstName = firstname;
-        this.surname = surname;
+    public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
     }
+
+
 
 }
 

@@ -14,13 +14,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import io.realm.Realm;
 import journeypackage.Journey;
 import journeypackage.JourneyManager;
 import personpackage.Person;
@@ -32,7 +32,7 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
 
     String journeyForm;
     String journeyTo;
-    int date;
+    String date;
     String name;
     String custFName;
     String email;
@@ -74,15 +74,6 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
         dateSelector = findViewById(R.id.dateSelector);
 
 
-
-//        dateSelector.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View veiw){
-//               datePicker();
-//            }
-//        });
-
-
         addJourney.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -90,16 +81,35 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
                 name = nameBox.getText().toString();
                 journeyForm = autoCompleteTextViewUserFrom.getText().toString();
                 journeyTo = autoCompleteTextViewUserTo.getText().toString();
-                date = Integer.parseInt(dateSelector.getText().toString());
+                date = dateSelector.getText().toString();
                 boolean ifJourneyAdded;
 
                 if(autoCompleteTextViewUserTo.getText().toString().trim().length() >0 && autoCompleteTextViewUserFrom.getText().toString().trim().length() >0
                         && dateSelector.getText().toString().trim().length() >0) {
-                    Journey journey = new Journey(journeyForm, journeyTo, date);
-                    journeyManager.addJourney(journey);
+                    Realm realm = Realm.getDefaultInstance();
+                    try {
+                        final Journey journey = new Journey();
+                        journey.setEmail(email);
+                        journey.setStartCounty(journeyForm);
+                        journey.setFinishCounty(journeyTo);
+                        journey.setDate(date);
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                try{
+                                    realm.copyToRealm(journey);
+                                    Toast.makeText(getApplicationContext(), "Journey Added", Toast.LENGTH_LONG).show();
 
-                        Toast.makeText(getApplicationContext(), "Journey Added", Toast.LENGTH_LONG).show();
+                                }catch(Exception e){
+                                    Toast.makeText(getApplicationContext(), "Journey Already Exists", Toast.LENGTH_LONG).show();
 
+                                }
+                            }
+                        });
+
+                    }finally {
+                        realm.close();
+                    }
 
                 }else {
                     Toast.makeText(getApplicationContext(), "Enter Journey", Toast.LENGTH_LONG).show();

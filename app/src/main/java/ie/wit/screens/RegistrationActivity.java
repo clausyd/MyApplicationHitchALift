@@ -11,14 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
+import io.realm.Realm;
+import journeypackage.Journey;
 import personpackage.Person;
 import personpackage.PersonManager;
 
@@ -30,6 +25,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText passwordBox;
     private EditText rePasswordBox;
     private Button submmit;
+
 
 
     String firstName;
@@ -51,6 +47,7 @@ public class RegistrationActivity extends AppCompatActivity {
         passwordBox = findViewById(R.id.password);
         rePasswordBox = findViewById(R.id.retypePassword);
         submmit = findViewById(R.id.submit);
+
 
 
 
@@ -77,24 +74,46 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
 
+
         if (fNameBox.getText().toString().trim().length() > 0 && lNameBox.getText().toString().trim().length() > 0
                 && emailBox.getText().toString().trim().length() > 0 && passwordBox.getText().toString().trim().length() > 0 &&
                 rePasswordBox.getText().toString().trim().length() > 0) {
             if (password.equals(rePassword)) {
-                Person cus = new Person(email,firstName, surname, password);
-                cust.addPerson(cus);
-                if (ifPersonAdded = true){
-                Toast.makeText(getApplicationContext(), "Account Setup is Complete", Toast.LENGTH_LONG).show();
 
-                Intent myIntent = new Intent(view.getContext(), Home_User_ScreenActivity.class);
-                myIntent.putExtra("Email", email);
+                Realm realm = Realm.getDefaultInstance();
+                try {
+                    final Person cust = new Person();
+                    cust.setEmail(email);
+                    cust.setFirstName(firstName);
+                    cust.setSurname(surname);
+                    cust.setPassword(password);
+//                    realm.beginTransaction();
+//                    Person realmOwner = realm.copyToRealm(cust);
+//                    realm.commitTransaction();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            try{
+                                realm.copyToRealm(cust);
+                                Toast.makeText(getApplicationContext(), "Customer Added", Toast.LENGTH_LONG).show();
 
-                startActivityForResult(myIntent, 0);}
-                else {
-                    Toast.makeText(getApplicationContext(), "Email already registered", Toast.LENGTH_LONG).show();
+                            }catch(Exception e){
+                                Toast.makeText(getApplicationContext(), "Email Already Exists", Toast.LENGTH_LONG).show();
 
+                            }
+                        }
+                    });
+
+                    Toast.makeText(getApplicationContext(), "Account Setup is Complete", Toast.LENGTH_LONG).show();
+                    Intent myIntent = new Intent(view.getContext(), Home_User_ScreenActivity.class);
+                    myIntent.putExtra("Email", email);
+                    startActivityForResult(myIntent, 0);
+                }finally {
+                    realm.close();
                 }
             }
+
+
         }else {
             Toast.makeText(getApplicationContext(), "Enter Your Details", Toast.LENGTH_LONG).show();
 
