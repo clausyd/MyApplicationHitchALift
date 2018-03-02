@@ -28,7 +28,7 @@ public class JourneyAdapter extends RealmBaseAdapter {
     private Context context;
     private OrderedRealmCollection <Journey> realmCollection;
 
-    public JourneyAdapter(@NonNull Context context, RealmResults<Journey> realmCollection) {
+    public JourneyAdapter(@NonNull Context context, OrderedRealmCollection<Journey> realmCollection) {
         super(realmCollection);
         this.realmCollection = realmCollection;
         this.context = context;
@@ -66,7 +66,7 @@ public class JourneyAdapter extends RealmBaseAdapter {
             date.setText(currentJourney.getDate());
 
        TextView email = (TextView) listItem.findViewById(R.id.row_email);
-        email.setText(currentJourney.getDate());
+        email.setText(currentJourney.getEmail());
 
         return listItem;
     }

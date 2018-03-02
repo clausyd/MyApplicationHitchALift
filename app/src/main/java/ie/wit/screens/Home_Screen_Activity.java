@@ -1,6 +1,5 @@
 package ie.wit.screens;
 
-import android.app.Application;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,28 +10,23 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
-
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import journeypackage.Journey;
-import journeypackage.JourneyManager;
 
 public class Home_Screen_Activity extends AppCompatActivity {
 
 
     AutoCompleteTextView autoCompleteTextView1;
     AutoCompleteTextView autoCompleteTextView2;
-    TextView dateSelector;
+    EditText dateSelector;
     String [] Country_Names;
     int day, month, year;
-    TextView date;
+
     ImageButton loginSignUp;
     Button search;
 
@@ -56,6 +50,7 @@ public class Home_Screen_Activity extends AppCompatActivity {
 
 
 
+
         search = findViewById(R.id.search);
 
         search.setOnClickListener(new View.OnClickListener() {
@@ -64,13 +59,16 @@ public class Home_Screen_Activity extends AppCompatActivity {
 
                 String to;
                 String from;
-                int d;
+                String date;
                 from = autoCompleteTextView1.getText().toString();
                 to = autoCompleteTextView2.getText().toString();
-                d =Integer.parseInt( dateSelector.getText().toString());
-                //Journey j = new Journey(from, to, d);
+                date = dateSelector.getText().toString();
                 Intent myIntent = new Intent(view.getContext(), Journey_ListActivity.class);
-                //myIntent.putExtra("Journey", j);
+                Bundle bundle = new Bundle();
+                bundle.putString("From" ,from);
+                bundle.putString("To" ,to);
+                bundle.putString("Date" ,date);
+                myIntent.putExtras(bundle);
                 startActivityForResult(myIntent, 0);
             }
         });
@@ -86,7 +84,7 @@ public class Home_Screen_Activity extends AppCompatActivity {
         });
 
         //YouTube. (2018). Using Date/Time Picker Dialog in Android Studio. [online] Available at: https://www.youtube.com/watch?v=a_Ap6T4RlYU&index=9&list=PL70y70C-OGAZucFOcbWyTmXZmB4amoHP3 [Accessed 7 Feb. 2018].
-        date = findViewById(R.id.dateSelector);
+
 
 //        date.setOnClickListener(new View.OnClickListener(){
 //            @Override
@@ -96,22 +94,22 @@ public class Home_Screen_Activity extends AppCompatActivity {
 //        });
     }
 
-    private void datePicker(){
-        Calendar calendar = Calendar.getInstance();
-        final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                year = view.getYear();
-                monthOfYear = view.getMonth();
-                dayOfMonth = view.getDayOfMonth();
-                date.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
-
-
-            }
-
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
-    }
+//    private void datePicker(){
+//        Calendar calendar = Calendar.getInstance();
+//        final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+//        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+//
+//            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                Calendar newDate = Calendar.getInstance();
+//                year = view.getYear();
+//                monthOfYear = view.getMonth();
+//                dayOfMonth = view.getDayOfMonth();
+//                date.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
+//
+//
+//            }
+//
+//        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+//        datePickerDialog.show();
+//    }
 }

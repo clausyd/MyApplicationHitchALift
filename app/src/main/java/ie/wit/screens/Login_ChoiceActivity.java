@@ -21,6 +21,10 @@ public class Login_ChoiceActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         signUp = findViewById(R.id.signUp);
 
+
+
+
+
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

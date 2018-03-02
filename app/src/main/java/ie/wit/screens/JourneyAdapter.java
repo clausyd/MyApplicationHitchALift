@@ -14,7 +14,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import journeypackage.Journey;
+import io.realm.RealmResults;
+import models.Journey;
 
 /**
  * Created by clausyd on 28/02/18.
@@ -25,7 +26,7 @@ public class JourneyAdapter extends ArrayAdapter<Journey> {
     private Context context;
     public List<Journey> journeys = new ArrayList<>();
 
-    public JourneyAdapter(@NonNull Context context, @SuppressLint("SupportAnnotationUsage") @LayoutRes ArrayList<Journey> list) {
+    public JourneyAdapter(@NonNull Context context, @SuppressLint("SupportAnnotationUsage") @LayoutRes RealmResults<Journey> list) {
         super(context, 0 , list);
         this.context = context;
         journeys = list;

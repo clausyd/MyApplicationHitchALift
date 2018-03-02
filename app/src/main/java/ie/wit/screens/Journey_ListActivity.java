@@ -1,37 +1,32 @@
 package ie.wit.screens;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
+import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
-import journeypackage.Journey;
-import journeypackage.JourneyManager;
+import io.realm.RealmList;
+import io.realm.RealmResults;
+import models.Journey;
 
 public class Journey_ListActivity extends AppCompatActivity {
 
     Journey j;
     ListView listView;
+    RealmResults<Journey> realmResultsPerson;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +42,19 @@ public class Journey_ListActivity extends AppCompatActivity {
         String to = bundle.getString("To");
         String date = bundle.getString("Date");
 
+        Realm.init(getApplicationContext());
         Realm realm = Realm.getDefaultInstance();
+       realmResultsPerson = getList();
+        Log.d("", "path: " + realm.getPath());
 
-        ArrayList list = new ArrayList((Collection) realm.where(Journey.class).equalTo("FROM",from ).and().equalTo("TO", to).and().equalTo("DATE", date).findAll() );
-       JourneyAdapter adapter = new JourneyAdapter(this, (ArrayList<Journey>) list);
+
+
+        //RealmResults<Journey> realmResultsPerson=  realm.where(Journey.class).equalTo("startCounty", String.valueOf(from)).findAll();
+
+        //Toast.makeText(getApplicationContext(), date, Toast.LENGTH_LONG).show();
+
+
+       JourneyAdapter adapter = new JourneyAdapter(this, realmResultsPerson);
        listView.setAdapter(adapter);
 
 
@@ -62,6 +66,11 @@ public class Journey_ListActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private RealmResults<Journey> getList(){
+        Realm realm = Realm.getDefaultInstance();
+        return realm.where(Journey.class).findAll();
     }
 
 

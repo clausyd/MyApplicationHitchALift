@@ -13,9 +13,7 @@ import android.widget.Toast;
 
 
 import io.realm.Realm;
-import journeypackage.Journey;
-import personpackage.Person;
-import personpackage.PersonManager;
+import models.Person;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -33,7 +31,6 @@ public class RegistrationActivity extends AppCompatActivity {
     String email;
     String password;
     String rePassword;
-    PersonManager cust = new PersonManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +92,9 @@ public class RegistrationActivity extends AppCompatActivity {
                         public void execute(Realm realm) {
                             try{
                                 realm.copyToRealm(cust);
+                                Intent myIntent = new Intent(getApplicationContext(), Home_User_ScreenActivity.class);
+                                myIntent.putExtra("Email", email);
+                                startActivityForResult(myIntent, 0);
                                 Toast.makeText(getApplicationContext(), "Customer Added", Toast.LENGTH_LONG).show();
 
                             }catch(Exception e){
@@ -105,9 +105,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     });
 
                     Toast.makeText(getApplicationContext(), "Account Setup is Complete", Toast.LENGTH_LONG).show();
-                    Intent myIntent = new Intent(view.getContext(), Home_User_ScreenActivity.class);
-                    myIntent.putExtra("Email", email);
-                    startActivityForResult(myIntent, 0);
+
+
                 }finally {
                     realm.close();
                 }
