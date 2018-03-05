@@ -82,34 +82,5 @@ public class Home_Screen_Activity extends AppCompatActivity {
                 startActivityForResult(myIntent, 0);
             }
         });
-
-        //YouTube. (2018). Using Date/Time Picker Dialog in Android Studio. [online] Available at: https://www.youtube.com/watch?v=a_Ap6T4RlYU&index=9&list=PL70y70C-OGAZucFOcbWyTmXZmB4amoHP3 [Accessed 7 Feb. 2018].
-
-
-//        date.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View veiw){
-////                datePicker();
-//            }
-//        });
     }
-
-//    private void datePicker(){
-//        Calendar calendar = Calendar.getInstance();
-//        final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-//        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-//
-//            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//                Calendar newDate = Calendar.getInstance();
-//                year = view.getYear();
-//                monthOfYear = view.getMonth();
-//                dayOfMonth = view.getDayOfMonth();
-//                date.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
-//
-//
-//            }
-//
-//        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-//        datePickerDialog.show();
-//    }
 }

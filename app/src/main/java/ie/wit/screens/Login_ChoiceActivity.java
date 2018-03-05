@@ -9,9 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import java.security.PublicKey;
+
 public class Login_ChoiceActivity extends AppCompatActivity {
 
     TextView signUp;
+    TextView loginEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +23,16 @@ public class Login_ChoiceActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         signUp = findViewById(R.id.signUp);
+        loginEmail = findViewById(R.id.loginEmail);
 
+        loginEmail.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent myIntent = new Intent(view.getContext(), LoginActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
 
-
+        });
 
 
         signUp.setOnClickListener(new View.OnClickListener() {

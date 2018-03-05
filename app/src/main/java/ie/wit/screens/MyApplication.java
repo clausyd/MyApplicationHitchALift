@@ -1,6 +1,7 @@
 package ie.wit.screens;
 
 import android.app.Application;
+import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -17,6 +18,9 @@ public class MyApplication extends Application{
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm").build();
         Realm.setDefaultConfiguration(config);
+        Realm realm = Realm.getDefaultInstance();
+        Log.d("myrealm.realm", "path: " + realm.getPath());
+
 
     }
 }
