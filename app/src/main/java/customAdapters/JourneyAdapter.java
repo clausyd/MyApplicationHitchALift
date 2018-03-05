@@ -1,21 +1,17 @@
 package customAdapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
 import ie.wit.screens.R;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
-import io.realm.RealmResults;
 import models.Journey;
 
 
@@ -33,19 +29,6 @@ public class JourneyAdapter extends RealmBaseAdapter {
         this.realmCollection = realmCollection;
         this.context = context;
     }
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        RowListviewBinding rowListviewBinding;
-//        if(convertView == null){
-//            convertView = LayoutInflater.from(context).inflate(R.layout.journey_row, null);
-//            rowListviewBinding = DataBindingUtil.bind(convertView);
-//            convertView.setTag(rowListviewBinding);
-//        }else{
-//            rowListviewBinding = (RowListviewBinding)convertView.getTag();
-//        }
-//        rowListviewBinding.setPerson(realmCollection.get(position));
-//        return rowListviewBinding.getRoot();
-//    }
 
     @NonNull
     @Override
