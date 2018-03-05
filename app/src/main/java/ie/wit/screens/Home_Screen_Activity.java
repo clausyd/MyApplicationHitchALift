@@ -18,6 +18,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import io.realm.Realm;
+import io.realm.RealmQuery;
+
 public class Home_Screen_Activity extends AppCompatActivity {
 
 
@@ -39,6 +42,7 @@ public class Home_Screen_Activity extends AppCompatActivity {
 
 
 
+
         // YouTube. (2018). Android Studio Tutorial - 10 - Working with AutoCompleteTextView. [online] Available at: https://www.youtube.com/watch?v=dEhE9MMR7mg&list=PL70y70C-OGAZucFOcbWyTmXZmB4amoHP3&index=1 [Accessed 7 Feb. 2018].        autoCompleteTextView1 = findViewById(R.id.to);
         autoCompleteTextView1 = findViewById(R.id.from);
         autoCompleteTextView2 = findViewById(R.id.to);
@@ -56,6 +60,7 @@ public class Home_Screen_Activity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 String to;
                 String from;

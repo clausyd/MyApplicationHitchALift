@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ie.wit.screens.Journey_ListActivity"
-    tools:showIn="@layout/activity_journey_list">
+    tools:context="ie.wit.screens.ListActivity">
+
 
 
     <ListView
