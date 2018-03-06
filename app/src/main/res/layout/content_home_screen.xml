@@ -82,7 +82,7 @@
         android:layout_marginLeft="8dp" />
 
     <AutoCompleteTextView
-        android:id="@+id/to"
+        android:id="@+id/from"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -99,7 +99,7 @@
         app:layout_constraintVertical_bias="0.404" />
 
     <AutoCompleteTextView
-        android:id="@+id/from"
+        android:id="@+id/to"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

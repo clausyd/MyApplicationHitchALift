@@ -48,9 +48,6 @@ public class JourneyAdapter extends RealmBaseAdapter {
            TextView date = (TextView) listItem.findViewById(R.id.row_journeyDate);
             date.setText(currentJourney.getDate());
 
-       TextView email = (TextView) listItem.findViewById(R.id.row_email);
-        email.setText(currentJourney.getEmail());
-
         return listItem;
     }
 

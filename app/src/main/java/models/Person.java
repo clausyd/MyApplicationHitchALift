@@ -7,6 +7,7 @@ package models;
 
 import java.io.Serializable;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -14,12 +15,15 @@ import io.realm.annotations.PrimaryKey;
 public class Person extends RealmObject implements Serializable {
 
 
-
     @PrimaryKey
+    private long id;
     private String email;
     private String firstName;
     public String surname;
     public String password;
+    //private RealmList<Journey> journeys;
+
+
 
     public Person()
     {}

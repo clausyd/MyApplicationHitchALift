@@ -42,20 +42,27 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Realm.init(getApplicationContext());
+
                 Realm realm = Realm.getDefaultInstance();
                 realm.beginTransaction();
-                RealmQuery<Person> results = realm.where(Person.class);
-                results.equalTo("email", email).equalTo("password",password );
-                RealmResults <Person> realmResults = results.findAll();
-               String p = null;
-                String e;
-                String pw;
-               e = realmResults.first().getEmail().toString();
-               p = realmResults.first().getPassword().toString();
+                RealmResults<Person> realmResults = realm.where(Person.class)
+                        .equalTo("email", email).equalTo("password",password ).findAll();
+
+               // RealmResults <Person> realmResults = results.findAll();
+//               String p = null;
+//                String e;
+//                String pw;
+//               e = realmResults.first().getEmail().toString();
+//               p = realmResults.first().getPassword().toString();
                 realm.commitTransaction();
 
-                if (email.equalsIgnoreCase(e) && password.equalsIgnoreCase(p)) {
-                    Toast.makeText(getApplicationContext(), realmResults.toString(), Toast.LENGTH_SHORT).show();
+                realm.close();
+
+                String e = realmResults.first().getEmail().toString();
+
+                if (realmResults != null) {
+                    Toast.makeText(getApplicationContext(), e, Toast.LENGTH_SHORT).show();
 
 
                 } else {

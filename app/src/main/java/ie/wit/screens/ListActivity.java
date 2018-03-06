@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import customAdapters.JourneyAdapter;
+import io.realm.Case;
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -33,8 +34,6 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         listView = findViewById(R.id.journeyList);
 
         Intent intent = getIntent();
@@ -45,28 +44,18 @@ public class ListActivity extends AppCompatActivity {
 
         Realm.init(getApplicationContext());
         Realm realm = Realm.getDefaultInstance();
-        realmResultsPerson = getList();
-        Log.d("", "path: " + realm.getPath());
+
+        RealmResults<Journey> realmResultsJourney=  realm.where(Journey.class)
+                .equalTo("startCounty", from, Case.INSENSITIVE)
+                .equalTo("finishCounty",to, Case.INSENSITIVE)
+                .equalTo("date", date, Case.INSENSITIVE)
+                .findAll();
 
 
-
-        //RealmResults<Journey> realmResultsPerson=  realm.where(Journey.class).equalTo("startCounty", String.valueOf(from)).findAll();
-
-        //Toast.makeText(getApplicationContext(), date, Toast.LENGTH_LONG).show();
-
-
-        JourneyAdapter adapter = new JourneyAdapter(this, realmResultsPerson);
+        JourneyAdapter adapter = new JourneyAdapter(this, realmResultsJourney);
         listView.setAdapter(adapter);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     private RealmResults<Journey> getList(){
