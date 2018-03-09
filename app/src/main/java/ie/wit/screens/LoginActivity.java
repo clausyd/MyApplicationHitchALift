@@ -10,18 +10,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import models.Person;
 
 public class LoginActivity extends AppCompatActivity {
-    TextView loginEmial;
-    TextView loginPassword;
+    EditText loginEmial;
+    EditText loginPassword;
     Button login;
+    RealmResults <Person> realmResults;
+
 
 
     private String email;
@@ -37,46 +41,38 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.email_sign_in_button);
 
 
-        email = loginEmial.getText().toString();
-        password = loginPassword.getText().toString();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                email = loginEmial.getText().toString();
+                password = loginPassword.getText().toString();
                 Realm.init(getApplicationContext());
-
                 Realm realm = Realm.getDefaultInstance();
-                realm.beginTransaction();
-                RealmResults<Person> realmResults = realm.where(Person.class)
-                        .equalTo("email", email).equalTo("password",password ).findAll();
+                realmResults = realm.where(Person.class)
+                        .equalTo("email", email).equalTo("password", password).findAll();
 
-               // RealmResults <Person> realmResults = results.findAll();
-//               String p = null;
-//                String e;
-//                String pw;
-//               e = realmResults.first().getEmail().toString();
-//               p = realmResults.first().getPassword().toString();
-                realm.commitTransaction();
-
-                realm.close();
-
-                String e = realmResults.first().getEmail().toString();
-
-                if (realmResults != null) {
-                    Toast.makeText(getApplicationContext(), e, Toast.LENGTH_SHORT).show();
+                        if (realmResults.isEmpty()) {
+                            Toast.makeText(getApplicationContext(), "Password or Email Does Not Exist", Toast.LENGTH_SHORT).show();
 
 
-                } else {
-                    Intent myIntent = new Intent(getApplicationContext(), Home_User_ScreenActivity.class);
-                    startActivityForResult(myIntent, 0);
+                        } else {
+                            Intent myIntent = new Intent(getApplicationContext(), Home_User_ScreenActivity.class);
+                            myIntent.putExtra("loginEmail", email);
+                            startActivityForResult(myIntent, 0);
 
 
-                }
+                        }
+
+                    }
+                });
+
 
             }
-        });
 
 
-    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

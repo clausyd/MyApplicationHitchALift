@@ -15,7 +15,6 @@ public class Journey extends RealmObject implements Serializable {
     private String email;
     public String startCounty;
     public String finishCounty;
-    @PrimaryKey
     public String date;
 
     public Journey(){

@@ -3,10 +3,10 @@
     <string name="action_settings">Delete Account</string>
     <string name="title_activity_registration">RegistrationActivity</string>
     <string name="update_account">Update Account</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_login__choice">Login_ChoiceActivity</string>
-    <string name="title_activity_home__screen_">Home_Screen_Activity</string>
-    <string name="title_activity_journey__list">Journey_ListActivity</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_login__choice">How Would You Like To Login</string>
+    <string name="title_activity_home__screen_">Home</string>
+    <string name="title_activity_journey__list">List Of Journey</string>
 
 
     <string-array name="country">

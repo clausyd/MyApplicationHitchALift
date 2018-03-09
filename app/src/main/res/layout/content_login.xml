@@ -61,7 +61,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
                     android:layout_marginTop="80dp"
-                    android:hint="@string/prompt_password"
+                    android:hint="Enter Password"
                     android:imeActionId="6"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"

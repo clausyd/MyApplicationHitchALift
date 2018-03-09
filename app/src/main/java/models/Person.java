@@ -16,7 +16,6 @@ public class Person extends RealmObject implements Serializable {
 
 
     @PrimaryKey
-    private long id;
     private String email;
     private String firstName;
     public String surname;

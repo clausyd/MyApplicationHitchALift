@@ -71,6 +71,7 @@ public class Home_Screen_Activity extends AppCompatActivity {
                 String to;
                 String from;
                 String date;
+
                 from = autoCompleteTextView1.getText().toString();
                 to = autoCompleteTextView2.getText().toString();
                 date = dateSelector.getText().toString();
@@ -92,9 +93,9 @@ public class Home_Screen_Activity extends AppCompatActivity {
 
                     Intent myIntent = new Intent(view.getContext(), ListActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("From" ,from);
                     bundle.putString("To" ,to);
                     bundle.putString("Date" ,date);
+                    bundle.putString("From" ,from);
                     myIntent.putExtras(bundle);
                     startActivityForResult(myIntent, 0);
 

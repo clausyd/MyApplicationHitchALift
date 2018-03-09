@@ -9,10 +9,10 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/update_account"
+        android:id="@+id/my_journeys"
         android:orderInCategory="100"
-        android:title="Update Account"
-        app:showAsAction="never"/>
+        android:title="My Journeys"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/logOut"
