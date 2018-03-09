@@ -1,6 +1,5 @@
 package ie.wit.screens;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,19 +10,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
 import io.realm.Realm;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import models.Journey;
 import models.Person;
@@ -155,8 +147,8 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
             return true;
         }else if(id == R.id.my_journeys){
 
-            Intent myIntent = new Intent(getApplicationContext(),my_journey_list.class);
-            myIntent.putExtra("EmailJourney", email);
+            Intent myIntent = new Intent(getApplicationContext(),My_journey_list.class);
+            myIntent.putExtra("emailJourney", loginEmail);
             startActivityForResult(myIntent, 0);
 
         }else if(id == R.id.logOut){

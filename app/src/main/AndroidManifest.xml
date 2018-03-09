@@ -38,7 +38,7 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ListActivity" />
-        <activity android:name=".my_journey_list"></activity>
+        <activity android:name=".My_journey_list"></activity>
     </application>
 
 </manifest>

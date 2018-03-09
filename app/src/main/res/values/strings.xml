@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Hitch A Lift</string>
     <string name="action_settings">Delete Account</string>
-    <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="title_activity_registration">Hitch A Lift</string>
     <string name="update_account">Update Account</string>
-    <string name="title_activity_login">Login</string>
-    <string name="title_activity_login__choice">How Would You Like To Login</string>
-    <string name="title_activity_home__screen_">Home</string>
-    <string name="title_activity_journey__list">List Of Journey</string>
+    <string name="title_activity_login">Hitch A Lift</string>
+    <string name="title_activity_login__choice">Hitch A Lift</string>
+    <string name="title_activity_home__screen_">Hitch A Lift</string>
+    <string name="title_activity_journey__list">Hitch A Lift</string>
 
 
     <string-array name="country">
