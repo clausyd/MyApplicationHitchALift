@@ -30,8 +30,7 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         listView = findViewById(R.id.journeyList);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -66,30 +65,6 @@ public class ListActivity extends AppCompatActivity {
 
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.journey_list, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_login) {
-            Intent myIntent = new Intent(getApplicationContext(), Home_Screen_Activity.class);
-            startActivityForResult(myIntent, 0);
-
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
 
     private RealmResults<Journey> getList(){

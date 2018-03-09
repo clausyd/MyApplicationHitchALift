@@ -9,6 +9,7 @@
 
 
 
+
     <ListView
         android:id="@+id/journeyList"
         android:layout_width="match_parent"

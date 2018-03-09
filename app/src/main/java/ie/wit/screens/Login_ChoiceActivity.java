@@ -51,7 +51,7 @@ public class Login_ChoiceActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.journey_list, menu);
+        getMenuInflater().inflate(R.menu.login, menu);
         return true;
     }
 
@@ -63,7 +63,7 @@ public class Login_ChoiceActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_login) {
+        if (id == R.id.action_log) {
             Intent myIntent = new Intent(getApplicationContext(), Home_Screen_Activity.class);
             startActivityForResult(myIntent, 0);
 

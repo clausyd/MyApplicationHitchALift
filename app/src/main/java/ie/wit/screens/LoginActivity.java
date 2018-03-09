@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_login) {
+        if (id == R.id.action_log) {
             Intent myIntent = new Intent(getApplicationContext(), Home_Screen_Activity.class);
             startActivityForResult(myIntent, 0);
 
