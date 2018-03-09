@@ -152,7 +152,8 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
             startActivityForResult(myIntent, 0);
 
         }else if(id == R.id.logOut){
-
+            Intent myIntent = new Intent(getApplicationContext(),Home_Screen_Activity.class);
+            startActivityForResult(myIntent, 0);
         }
 
         return super.onOptionsItemSelected(item);

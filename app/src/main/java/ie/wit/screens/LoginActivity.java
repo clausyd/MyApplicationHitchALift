@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         loginEmial = findViewById(R.id.loginEmail);
         loginPassword = findViewById(R.id.loginPassword);
         login = findViewById(R.id.email_sign_in_button);
