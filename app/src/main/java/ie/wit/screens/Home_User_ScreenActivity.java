@@ -26,10 +26,12 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
     TextView nameBox;
     String loginEmail;
     String journeyForm;
+    String homeEmail;
     String journeyTo;
     String date;
     String name;
     String email;
+    String emailJourney;
     Button addJourney;
     AutoCompleteTextView autoCompleteTextViewUserFrom;
     AutoCompleteTextView autoCompleteTextViewUserTo;
@@ -57,12 +59,23 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
         Intent intent = getIntent();
         email  =  intent.getStringExtra("Email");
         loginEmail = intent.getStringExtra("loginEmail");
+        emailJourney = intent.getStringExtra("emailJourney");
+        homeEmail = intent.getStringExtra("homeEmail");
 
 
         addJourney = findViewById(R.id.addJounrey);
         nameBox = findViewById(R.id.name);
         nameBox.setText(email);
-        nameBox.setText(loginEmail);
+        if(email != null){
+            nameBox.setText(email);
+        }else if(loginEmail != null){
+            nameBox.setText(loginEmail);
+        }else if(emailJourney != null){
+            nameBox.setText(emailJourney);
+        }else{
+            nameBox.setText(homeEmail);
+        }
+
 
 
 
@@ -130,8 +143,8 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             Realm realm = Realm.getDefaultInstance();
             RealmResults<Person> results = realm.where(Person.class)
-                    .equalTo("email", email)
-                    .equalTo("email", loginEmail).findAll();
+                    .equalTo("email", email).and()
+                    .equalTo("email", loginEmail).and().equalTo("email",emailJourney).findAll();
             realm.beginTransaction();
             if(results.isEmpty()){
                 results.deleteAllFromRealm();
@@ -147,7 +160,7 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
             return true;
         }else if(id == R.id.my_journeys){
 
-            Intent myIntent = new Intent(getApplicationContext(),My_journey_list.class);
+            Intent myIntent = new Intent(getApplicationContext(),MyJourneyList.class);
             myIntent.putExtra("emailJourney", loginEmail);
             startActivityForResult(myIntent, 0);
 
