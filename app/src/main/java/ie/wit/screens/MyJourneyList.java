@@ -19,6 +19,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import customAdapters.JourneyAdapter;
 import io.realm.Case;
+import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import models.Journey;
@@ -28,7 +29,9 @@ import static android.widget.AdapterView.*;
 public class MyJourneyList extends AppCompatActivity {
     SwipeMenuListView listView;
     String email;
+    Realm realm;
     RealmResults<Journey> realmResultsJourney;
+    JourneyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +43,13 @@ public class MyJourneyList extends AppCompatActivity {
         Intent intent = getIntent();
         email  =  intent.getStringExtra("emailJourney");
         Realm.init(getApplicationContext());
-        final Realm realm = Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance();
         realmResultsJourney=  realm.where(Journey.class)
                 .equalTo("email", email, Case.INSENSITIVE)
                 .findAll();
 
 
-        final JourneyAdapter adapter = new JourneyAdapter(this, realmResultsJourney);
+        adapter= new JourneyAdapter(this, realmResultsJourney);
         listView.setAdapter(adapter);
 //GitHub. (2018). baoyongzhang/SwipeMenuListView. [online] Available at: https://github.com/baoyongzhang/SwipeMenuListView [Accessed 9 Mar. 2018].
         SwipeMenuCreator creator = new SwipeMenuCreator() {
@@ -78,7 +81,6 @@ public class MyJourneyList extends AppCompatActivity {
         };
         listView.setMenuCreator(creator);
         listView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
-        adapter.notifyDataSetChanged();
 
 
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
@@ -89,14 +91,18 @@ public class MyJourneyList extends AppCompatActivity {
                         // open
                         break;
                     case 1:
-//                        realm.beginTransaction();
-//                        realmResultsJourney.get(position).deleteFromRealm();
-//                        realm.commitTransaction();
-//                        realm.close();
-//                        listView.removeViewAt(index);
-
-
-
+                        realm.beginTransaction();
+                        Journey j =realmResultsJourney.get(position);
+                        RealmResults<Journey> r = realm.where(Journey.class)
+                                .equalTo("email", j.getEmail())
+                                .equalTo("startCounty", j.getStartCounty())
+                                .equalTo("finishCounty", j.getFinishCounty())
+                                .findAllAsync();
+                        r.deleteAllFromRealm();
+                        realm.commitTransaction();
+                        realm.close();
+                        //listView.removeViewAt(position);
+                        adapter.notifyDataSetChanged();
                         break;
                 }
                 // false : close the menu; true : not close the menu

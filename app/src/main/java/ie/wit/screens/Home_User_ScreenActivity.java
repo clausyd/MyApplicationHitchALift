@@ -65,7 +65,7 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
 
         addJourney = findViewById(R.id.addJounrey);
         nameBox = findViewById(R.id.name);
-        nameBox.setText(email);
+
         if(email != null){
             nameBox.setText(email);
         }else if(loginEmail != null){
@@ -94,7 +94,7 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
                     Realm realm = Realm.getDefaultInstance();
                     try {
                         final Journey journey = new Journey();
-                        journey.setEmail(email);
+                        journey.setEmail(name);
                         journey.setStartCounty(journeyForm);
                         journey.setFinishCounty(journeyTo);
                         journey.setDate(String.valueOf(date));
@@ -143,12 +143,12 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             Realm realm = Realm.getDefaultInstance();
             RealmResults<Person> results = realm.where(Person.class)
-                    .equalTo("email", email).and()
-                    .equalTo("email", loginEmail).and().equalTo("email",emailJourney).findAll();
+                    .equalTo("email", loginEmail).findAll();
             realm.beginTransaction();
-            if(results.isEmpty()){
+            if(!results.isEmpty()){
                 results.deleteAllFromRealm();
                 realm.commitTransaction();
+                realm.close();
                 Toast.makeText(getApplicationContext(), "Account Removed ", Toast.LENGTH_SHORT).show();
                 Intent myIntent = new Intent(getApplicationContext(), Home_Screen_Activity.class);
                 startActivityForResult(myIntent, 0);
