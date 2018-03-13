@@ -58,4 +58,5 @@
     <string name="title_activity_list">Hitch A Lift</string>
     <string name="title_activity_list2">ListActivity2</string>
     <string name="title_activity_my_journey_list">MyJourneyList</string>
+    <string name="title_activity_update__journey">Update_JourneyActivity</string>
 </resources>

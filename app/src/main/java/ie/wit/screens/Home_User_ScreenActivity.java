@@ -102,7 +102,7 @@ public class Home_User_ScreenActivity extends AppCompatActivity {
                             @Override
                             public void execute(Realm realm) {
                                 try{
-                                     final Journey j = realm.copyToRealm(journey);
+                                    realm.copyToRealm(journey);
                                     Toast.makeText(getApplicationContext(), "Journey Added", Toast.LENGTH_LONG).show();
 
                                 }catch(Exception e){

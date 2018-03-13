@@ -44,6 +44,10 @@
         <activity
             android:name=".MyJourneyList"
             android:label="@string/title_activity_my_journey_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Update_JourneyActivity"
+            android:label="@string/title_activity_update__journey"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

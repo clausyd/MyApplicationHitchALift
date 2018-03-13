@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -86,9 +87,13 @@ public class MyJourneyList extends AppCompatActivity {
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+
+                adapter= new JourneyAdapter(getApplicationContext(), realmResultsJourney);
+
                 switch (index) {
                     case 0:
-                        // open
+                        Intent myIntent = new Intent(getApplicationContext(), Update_JourneyActivity.class);
+                        startActivityForResult(myIntent, 0);
                         break;
                     case 1:
                         realm.beginTransaction();
@@ -97,12 +102,21 @@ public class MyJourneyList extends AppCompatActivity {
                                 .equalTo("email", j.getEmail())
                                 .equalTo("startCounty", j.getStartCounty())
                                 .equalTo("finishCounty", j.getFinishCounty())
-                                .findAllAsync();
+                                .findAll();
                         r.deleteAllFromRealm();
                         realm.commitTransaction();
                         realm.close();
-                        //listView.removeViewAt(position);
-                        adapter.notifyDataSetChanged();
+                        realmResultsJourney = realm.where(Journey.class).equalTo("email", email).findAllAsync();
+                        if(listView.getAdapter().isEmpty()){
+
+                            listView.setAdapter(adapter);
+                        }else{
+                            listView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                            listView.invalidateViews();
+                            listView.refreshDrawableState();
+                        }
+
                         break;
                 }
                 // false : close the menu; true : not close the menu
