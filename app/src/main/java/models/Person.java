@@ -20,7 +20,7 @@ public class Person extends RealmObject implements Serializable {
     private String firstName;
     public String surname;
     public String password;
-    //private RealmList<Journey> journeys;
+    //private RealmList<Car> carDetails;
 
 
 

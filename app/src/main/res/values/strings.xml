@@ -59,4 +59,19 @@
     <string name="title_activity_list2">ListActivity2</string>
     <string name="title_activity_my_journey_list">MyJourneyList</string>
     <string name="title_activity_update__journey">Update_JourneyActivity</string>
+    <string name="title_activity_add_car">AddCarActivity</string>
+    <string name="title_activity_login2">Sign in</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

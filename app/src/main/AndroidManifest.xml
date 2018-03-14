@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ie.wit.screens">
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -30,10 +35,6 @@
             android:label="@string/title_activity_login__choice"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Home_User_ScreenActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -48,6 +49,17 @@
         <activity
             android:name=".Update_JourneyActivity"
             android:label="@string/title_activity_update__journey"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddCarActivity"
+            android:label="@string/title_activity_add_car"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginActivity2"
+            android:label="@string/title_activity_login2" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

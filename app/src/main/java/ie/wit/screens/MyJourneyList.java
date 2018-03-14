@@ -149,7 +149,7 @@ public class MyJourneyList extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.journey_list) {
-            Intent myIntent = new Intent(getApplicationContext(), Home_User_ScreenActivity.class);
+            Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
             myIntent.putExtra("homeEmail",email);
             startActivityForResult(myIntent, 0);
 

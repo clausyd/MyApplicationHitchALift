@@ -92,7 +92,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         public void execute(Realm realm) {
                             try{
                                 realm.copyToRealm(cust);
-                                Intent myIntent = new Intent(getApplicationContext(), Home_User_ScreenActivity.class);
+                                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
                                 myIntent.putExtra("Email", email);
                                 startActivityForResult(myIntent, 0);
                                 Toast.makeText(getApplicationContext(), "Customer Added", Toast.LENGTH_LONG).show();

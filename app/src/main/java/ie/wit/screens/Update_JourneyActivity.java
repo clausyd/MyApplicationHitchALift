@@ -80,7 +80,7 @@ public class Update_JourneyActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Journey Date Updated", Toast.LENGTH_LONG).show();
 
                 }
-              
+
               realmResultsJourney = realm.where(Journey.class).equalTo("id", id).findFirst();
               email = realmResultsJourney.getEmail();
               Intent myIntent = new Intent(getApplicationContext(), MyJourneyList.class);
@@ -108,7 +108,7 @@ public class Update_JourneyActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.journey_list) {
-            Intent myIntent = new Intent(getApplicationContext(), Home_User_ScreenActivity.class);
+            Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
             myIntent.putExtra("homeEmail",email);
             startActivityForResult(myIntent, 0);
 
