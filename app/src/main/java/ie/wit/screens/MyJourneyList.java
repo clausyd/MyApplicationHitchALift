@@ -29,11 +29,11 @@ import static android.widget.AdapterView.*;
 
 public class MyJourneyList extends AppCompatActivity {
     SwipeMenuListView listView;
-    String email;
+    String email, journeyEmail;
     Realm realm;
     RealmResults<Journey> realmResultsJourney;
     JourneyAdapter adapter;
-
+    Journey j;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +43,15 @@ public class MyJourneyList extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
         email  =  intent.getStringExtra("emailJourney");
+        journeyEmail = intent.getStringExtra("journeyEmail");
         Realm.init(getApplicationContext());
         realm = Realm.getDefaultInstance();
-        realmResultsJourney=  realm.where(Journey.class)
-                .equalTo("email", email, Case.INSENSITIVE)
-                .findAll();
+        if(email != null) {
+            realmResultsJourney = realm.where(Journey.class).equalTo("email", email, Case.INSENSITIVE).findAll();
+        }else{
+            realmResultsJourney = realm.where(Journey.class).equalTo("email", journeyEmail, Case.INSENSITIVE).findAll();
 
+        }
 
         adapter= new JourneyAdapter(this, realmResultsJourney);
         listView.setAdapter(adapter);
@@ -92,12 +95,14 @@ public class MyJourneyList extends AppCompatActivity {
 
                 switch (index) {
                     case 0:
+                        j  =realmResultsJourney.get(position);
                         Intent myIntent = new Intent(getApplicationContext(), Update_JourneyActivity.class);
+                        myIntent.putExtra("PersonID",j.getId() );
                         startActivityForResult(myIntent, 0);
                         break;
                     case 1:
                         realm.beginTransaction();
-                        Journey j =realmResultsJourney.get(position);
+                        j  =realmResultsJourney.get(position);
                         RealmResults<Journey> r = realm.where(Journey.class)
                                 .equalTo("email", j.getEmail())
                                 .equalTo("startCounty", j.getStartCounty())
@@ -149,6 +154,9 @@ public class MyJourneyList extends AppCompatActivity {
             startActivityForResult(myIntent, 0);
 
 
+        }else if(id == R.id.logOutJourneyList){
+            Intent myIntent = new Intent(getApplicationContext(),Home_Screen_Activity.class);
+            startActivityForResult(myIntent, 0);
         }
         return super.onOptionsItemSelected(item);
     }

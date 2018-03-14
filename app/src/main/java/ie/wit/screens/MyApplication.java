@@ -16,10 +16,10 @@ public class MyApplication extends Application{
     public void onCreate() {
         super.onCreate();
         Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm").build();
+        RealmConfiguration config = new RealmConfiguration.Builder().name("HitchALift.realm").build();
         Realm.setDefaultConfiguration(config);
         Realm realm = Realm.getDefaultInstance();
-        Log.d("myrealm.realm", "path: " + realm.getPath());
+        Log.d("HitchALift.realm", "path: " + realm.getPath());
 
 
     }

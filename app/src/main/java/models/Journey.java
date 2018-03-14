@@ -2,6 +2,7 @@ package models;
 
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -11,6 +12,9 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class Journey extends RealmObject implements Serializable {
+    private String id = UUID.randomUUID().toString();
+
+
 
     private String email;
     public String startCounty;
@@ -20,6 +24,8 @@ public class Journey extends RealmObject implements Serializable {
     public Journey(){
 
     }
+
+    public String getId() {return id;}
 
     public void setEmail(String email) {
         this.email = email;

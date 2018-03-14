@@ -18,7 +18,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="117dp"
+        android:layout_height="175dp"
         app:srcCompat="@drawable/background" />
 
     <ScrollView
@@ -42,7 +42,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="90dp"
                     android:hint="Enter Emial"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="40dp"
-                    android:layout_marginTop="80dp"
+                    android:layout_marginTop="120dp"
                     android:hint="Enter Password"
                     android:imeActionId="6"
                     android:imeOptions="actionUnspecified"
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="30dp"
                 android:backgroundTint="@android:color/holo_blue_bright"
                 android:fontFamily="sans-serif-condensed"
                 android:text="Sign In"
