@@ -23,7 +23,7 @@ public class MyApp extends Application{
             Log.v("Donate", "Donation App Started");
             dbManager = new DBManager(this);
             dbManager.open();
-            Log.d("HitchALift.realm", "Realm Database Created & Opened");
+            Log.d("HitchALift2.realm", "Realm Database Created & Opened");
 
 
         }

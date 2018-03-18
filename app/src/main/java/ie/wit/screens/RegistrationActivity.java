@@ -16,7 +16,7 @@ import io.realm.Realm;
 import models.Person;
 import models.UserCradentials;
 
-public class RegistrationActivity extends Home_Screen_Activity {
+public class RegistrationActivity extends Login_ChoiceActivity {
 
      EditText fNameBox;
      EditText lNameBox;
@@ -40,12 +40,14 @@ public class RegistrationActivity extends Home_Screen_Activity {
         setContentView(R.layout.activity_registration);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        submmit = findViewById(R.id.submit);
 
 
         submmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addCustomer(view);
+
+                addCustomer();
 
             }
         });
@@ -53,13 +55,12 @@ public class RegistrationActivity extends Home_Screen_Activity {
     }
 
 
-    public void addCustomer(View view) {
+    public void addCustomer() {
         fNameBox = findViewById(R.id.firstName);
         lNameBox = findViewById(R.id.surname);
         emailBox = findViewById(R.id.email);
         passwordBox = findViewById(R.id.password);
         rePasswordBox = findViewById(R.id.retypePassword);
-        submmit = findViewById(R.id.submit);
         dob = findViewById(R.id.dob);
 
         firstName = fNameBox.getText().toString();

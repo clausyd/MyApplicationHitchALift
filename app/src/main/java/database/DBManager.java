@@ -31,8 +31,8 @@ public class DBManager {
     public DBManager(Context context) {
 
         Realm.init(context);
-        RealmConfiguration config = new RealmConfiguration.Builder().name("HitchALift.realm").build();
-        Realm.setDefaultConfiguration(config);
+        RealmConfiguration config2 = new RealmConfiguration.Builder().name("HitchALift2.realm").build();
+        Realm.setDefaultConfiguration(config2);
         realmDatabase = Realm.getDefaultInstance();
 
 
@@ -55,8 +55,6 @@ public class DBManager {
 
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Journey Already Exists", Toast.LENGTH_LONG).show();
-        } finally {
-            realmDatabase.close();
         }
     }
 
@@ -86,7 +84,6 @@ public class DBManager {
             realmResultsJourney = realmDatabase.where(Journey.class).equalTo("id", id).findFirst();
             realmResultsJourney.setStartCounty(updateJourneyFrom);
             realmDatabase.commitTransaction();
-            realmDatabase.close();
             Toast.makeText(getApplicationContext(), "Journey Starting Point Updated", Toast.LENGTH_LONG).show();
 
         }
@@ -95,7 +92,6 @@ public class DBManager {
             realmResultsJourney = realmDatabase.where(Journey.class).equalTo("id", id).findFirst();
             realmResultsJourney.setFinishCounty(updateJourneyTo);
             realmDatabase.commitTransaction();
-            realmDatabase.close();
             Toast.makeText(getApplicationContext(), "Journey Destination Updated", Toast.LENGTH_LONG).show();
 
         }
@@ -104,7 +100,6 @@ public class DBManager {
             realmResultsJourney = realmDatabase.where(Journey.class).equalTo("id", id).findFirst();
             realmResultsJourney.setDate(updateJourneyDate);
             realmDatabase.commitTransaction();
-            realmDatabase.close();
             Toast.makeText(getApplicationContext(), "Journey Date Updated", Toast.LENGTH_LONG).show();
 
         }
@@ -122,38 +117,37 @@ public class DBManager {
         RealmResults<Journey> r = realmDatabase.where(Journey.class).equalTo("email", e).equalTo("startCounty", f).equalTo("finishCounty", t).findAll();
         r.deleteAllFromRealm();
         realmDatabase.commitTransaction();
-        realmDatabase.close();
         return adapter;
     }
 
 
     public JourneyAdapter getJourenys(String from, String to, String date) {
 
-        realmResultsJourney = realmDatabase.where(Journey.class).equalTo("startCounty", from, Case.INSENSITIVE).equalTo("finishCounty", to, Case.INSENSITIVE).equalTo("date", date, Case.INSENSITIVE).findAll();
+        realmResultsJourney = realmDatabase.where(Journey.class)
+                .equalTo("startCounty", from, Case.INSENSITIVE)
+                .equalTo("finishCounty", to, Case.INSENSITIVE)
+                .equalTo("date", date, Case.INSENSITIVE).findAll();
         adapter = new JourneyAdapter(getApplicationContext(), realmResultsJourney);
         return adapter;
     }
 
-    public JourneyAdapter getUserJourneys(String email, String journeyEmail) {
+    public RealmResults<Journey> getUserJourneys(String email, String journeyEmail) {
         if (email != null) {
-            realmResultsJourney = realmDatabase.where(Journey.class).equalTo("email", email, Case.INSENSITIVE).findAll();
+            realmResultsJourney = realmDatabase.where(Journey.class)
+                    .equalTo("email", email, Case.INSENSITIVE).findAll();
+            return realmResultsJourney;
+
         } else {
-            realmResultsJourney = realmDatabase.where(Journey.class).equalTo("email", journeyEmail, Case.INSENSITIVE).findAll();
+            realmResultsJourney = realmDatabase.where(Journey.class)
+                    .equalTo("email", journeyEmail, Case.INSENSITIVE).findAll();
+            return realmResultsJourney;
         }
-        adapter = new JourneyAdapter(getApplicationContext(), realmResultsJourney);
-        return adapter;
     }
 
     public Journey get(String id) {
         return realmDatabase.where(Journey.class).equalTo("id", id).findAll().first();
     }
 
-    public RealmResults<Journey> selectedJourneys(String from, String to, String date) {
-
-        realmResultsJourney = realmDatabase.where(Journey.class).equalTo("startCounty", from, Case.INSENSITIVE).equalTo("finishCounty", to, Case.INSENSITIVE).equalTo("date", date, Case.INSENSITIVE).findAll();
-
-        return realmResultsJourney;
-    }
 
     public void reset() {
         realmDatabase.beginTransaction();
@@ -168,7 +162,6 @@ public class DBManager {
             realmDatabase.beginTransaction();
             results.deleteAllFromRealm();
             realmDatabase.commitTransaction();
-            realmDatabase.close();
 
         return results;
     }

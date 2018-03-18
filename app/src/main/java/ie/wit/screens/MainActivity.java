@@ -48,6 +48,7 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        addJourney = findViewById(R.id.addJounrey);
 
 
         Intent intent = getIntent();
@@ -161,7 +162,7 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
 
 
     public void returnUpdatedJourney(){
-        addJourney = findViewById(R.id.addJounrey);
+
         autoCompleteTextViewUserFrom = findViewById(R.id.autoCompleteTextVieUserFrom);
         autoCompleteTextViewUserTo = findViewById(R.id.autoCompleteTextVieUserTo);
         Country_Names = getResources().getStringArray(R.array.country);

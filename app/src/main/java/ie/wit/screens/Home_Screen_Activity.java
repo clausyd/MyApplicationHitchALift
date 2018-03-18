@@ -48,7 +48,7 @@ public class Home_Screen_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         myApp = (MyApp) getApplication();
         myApp.dbManager.open();
-        addUserOnStart();
+        //addUserOnStart();
         setContentView(R.layout.activity_home_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -99,13 +99,9 @@ public class Home_Screen_Activity extends AppCompatActivity {
             to = autoCompleteTextView2.getText().toString();
             date = dateSelector.getText().toString();
 
-            realmResultsJourney = myApp.dbManager.selectedJourneys(to, from, date);
+            //realmResultsJourney = myApp.dbManager.selectedJourneys(to, from, date);
 
             if (autoCompleteTextView1.getText().toString().trim().length() > 0 && autoCompleteTextView2.getText().toString().trim().length() > 0 && dateSelector.getText().toString().trim().length() > 0) {
-                if (realmResultsJourney.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "No Journeys For This Date", Toast.LENGTH_LONG).show();
-
-                } else {
 
                     Intent myIntent = new Intent(view.getContext(), ListActivity.class);
                     Bundle bundle = new Bundle();
@@ -114,7 +110,7 @@ public class Home_Screen_Activity extends AppCompatActivity {
                     bundle.putString("From", from);
                     myIntent.putExtras(bundle);
                     startActivityForResult(myIntent, 0);
-                }
+
             } else {
                 Toast.makeText(getApplicationContext(), "Please Enter A Journey", Toast.LENGTH_LONG).show();
             }
