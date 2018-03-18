@@ -25,7 +25,7 @@ import io.realm.RealmResults;
 import models.Journey;
 import models.Person;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends Home_Screen_Activity implements NavigationView.OnNavigationItemSelectedListener {
 
     private EditText dateSelector;
     TextView nameBox;

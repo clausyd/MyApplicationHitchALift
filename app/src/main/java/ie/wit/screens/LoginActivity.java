@@ -20,7 +20,7 @@ import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import models.Person;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Home_Screen_Activity{
     EditText loginEmial;
     EditText loginPassword;
     Button login;
@@ -48,33 +48,18 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 email = loginEmial.getText().toString();
                 password = loginPassword.getText().toString();
-                Realm.init(getApplicationContext());
-                Realm realm = Realm.getDefaultInstance();
-                realmResults = realm.where(Person.class)
-                        .equalTo("email", email).equalTo("password", password).findAll();
-
+                 RealmResults<Person> realmResults = myApp.dbManager.p_word(email,password);
                         if (realmResults.isEmpty()) {
                             Toast.makeText(getApplicationContext(), "Password or Email Does Not Exist", Toast.LENGTH_SHORT).show();
-
-
                         } else {
                             Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
                             myIntent.putExtra("loginEmail", email);
                             startActivityForResult(myIntent, 0);
-
-
                         }
 
                     }
                 });
-
-
-            }
-
-
-
-
-    @Override
+ }@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.login, menu);

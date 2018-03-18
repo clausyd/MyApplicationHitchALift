@@ -17,14 +17,9 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import models.Journey;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends Home_Screen_Activity {
 
-    Journey j;
     ListView listView;
-    RealmResults<Journey> realmResultsJourney;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,38 +28,14 @@ public class ListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         listView = findViewById(R.id.journeyList);
 
-
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String from = bundle.getString("From");
         String to = bundle.getString("To");
         String date = bundle.getString("Date");
 
-
-        Realm.init(getApplicationContext());
-        Realm realm = Realm.getDefaultInstance();
-        realmResultsJourney=  realm.where(Journey.class)
-                .equalTo("startCounty", from, Case.INSENSITIVE)
-                .equalTo("finishCounty",to, Case.INSENSITIVE)
-                .equalTo("date", date, Case.INSENSITIVE)
-                .findAll();
-
-
-        JourneyAdapter adapter = new JourneyAdapter(this, realmResultsJourney);
+        JourneyAdapter adapter = myApp.dbManager.getJourenys(from,to,date);
         listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //int p =
-
-
-
-            }
-        });
-
-
-
 
     }
     @Override
@@ -84,17 +55,8 @@ public class ListActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.journey_list) {
             Intent myIntent = new Intent(getApplicationContext(), Home_Screen_Activity.class);
-            startActivityForResult(myIntent, 0);
-
-
-        }
+            startActivityForResult(myIntent, 0);}
         return super.onOptionsItemSelected(item);
-    }
-
-
-    private RealmResults<Journey> getList(){
-        Realm realm = Realm.getDefaultInstance();
-        return realm.where(Journey.class).findAll();
     }
 }
 

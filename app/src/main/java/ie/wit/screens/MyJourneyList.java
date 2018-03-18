@@ -19,15 +19,12 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import customAdapters.JourneyAdapter;
-import io.realm.Case;
-import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import models.Journey;
 
-import static android.widget.AdapterView.*;
 
-public class MyJourneyList extends AppCompatActivity {
+public class MyJourneyList extends MainActivity {
     SwipeMenuListView listView;
     String email, journeyEmail;
     Realm realm;
@@ -44,17 +41,12 @@ public class MyJourneyList extends AppCompatActivity {
         Intent intent = getIntent();
         email  =  intent.getStringExtra("emailJourney");
         journeyEmail = intent.getStringExtra("journeyEmail");
-        Realm.init(getApplicationContext());
-        realm = Realm.getDefaultInstance();
-        if(email != null) {
-            realmResultsJourney = realm.where(Journey.class).equalTo("email", email, Case.INSENSITIVE).findAll();
-        }else{
-            realmResultsJourney = realm.where(Journey.class).equalTo("email", journeyEmail, Case.INSENSITIVE).findAll();
-
-        }
-
-        adapter= new JourneyAdapter(this, realmResultsJourney);
+        adapter = myApp.dbManager.getUserJourneys(email,journeyEmail);
         listView.setAdapter(adapter);
+
+
+
+
 //GitHub. (2018). baoyongzhang/SwipeMenuListView. [online] Available at: https://github.com/baoyongzhang/SwipeMenuListView [Accessed 9 Mar. 2018].
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -101,16 +93,11 @@ public class MyJourneyList extends AppCompatActivity {
                         startActivityForResult(myIntent, 0);
                         break;
                     case 1:
-                        realm.beginTransaction();
                         j  =realmResultsJourney.get(position);
-                        RealmResults<Journey> r = realm.where(Journey.class)
-                                .equalTo("email", j.getEmail())
-                                .equalTo("startCounty", j.getStartCounty())
-                                .equalTo("finishCounty", j.getFinishCounty())
-                                .findAll();
-                        r.deleteAllFromRealm();
-                        realm.commitTransaction();
-                        realm.close();
+                        String email =j.getEmail();
+                        String from = j.getStartCounty();
+                        String to =  j.getFinishCounty();
+                        myApp.dbManager.deleteJourneyList(email,from,to);
                         realmResultsJourney = realm.where(Journey.class).equalTo("email", email).findAllAsync();
                         if(listView.getAdapter().isEmpty()){
 
