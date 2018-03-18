@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.security.PublicKey;
 
-public class Login_ChoiceActivity extends AppCompatActivity {
+public class Login_ChoiceActivity extends Home_Screen_Activity{
 
     TextView signUp;
     TextView loginEmail;

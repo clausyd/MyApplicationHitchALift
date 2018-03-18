@@ -19,10 +19,8 @@ import io.realm.RealmResults;
 import models.Journey;
 import models.Person;
 
-public class Update_JourneyActivity extends AppCompatActivity {
-    Person person;
-    String id,email, fName,lName;
-    Journey realmResultsJourney;
+public class Update_JourneyActivity extends MyJourneyList {
+    String id,email;
     Realm realm;
     EditText updateJourneyFrom,updateJourneyTo,updateJourneyDate;
     Button update;
@@ -48,39 +46,18 @@ public class Update_JourneyActivity extends AppCompatActivity {
       update.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
+
+              updateJourneyFrom = findViewById(R.id.updateJourneyFrom);
+              updateJourneyTo = findViewById(R.id.updateJourneyTo);
+              updateJourneyDate = findViewById(R.id.updateDate);
+              update = findViewById(R.id.updateButton);
+
               uJF = updateJourneyFrom.getText().toString();
               uJT = updateJourneyTo.getText().toString();
               uJD = updateJourneyDate.getText().toString();
-              if(uJF.trim().length() >0){
-                  realm.beginTransaction();
-                  realmResultsJourney=  realm.where(Journey.class)
-                          .equalTo("id", id)
-                          .findFirst();
-                  realmResultsJourney.setStartCounty(uJF);
-                  realm.commitTransaction();
-                  realm.close();
-                  Toast.makeText(getApplicationContext(), "Journey Starting Point Updated", Toast.LENGTH_LONG).show();
 
-              } if(uJT.trim().length() >0){
-                  realm.beginTransaction();
-                  realmResultsJourney=  realm.where(Journey.class)
-                          .equalTo("id", id)
-                          .findFirst();
-                  realmResultsJourney.setFinishCounty(uJT);
-                  realm.commitTransaction();
-                  realm.close();
-                  Toast.makeText(getApplicationContext(), "Journey Destination Updated", Toast.LENGTH_LONG).show();
-
-              } if(uJD.trim().length() >0) {
-                    realm.beginTransaction();
-                    realmResultsJourney = realm.where(Journey.class).equalTo("id", id).findFirst();
-                    realmResultsJourney.setDate(uJD);
-                    realm.commitTransaction();
-                    realm.close();
-                    Toast.makeText(getApplicationContext(), "Journey Date Updated", Toast.LENGTH_LONG).show();
-
-                }
-
+              Journey realmResultsJourney =myApp.dbManager.updateJourney(id,uJF,uJT,uJD);
+              if(realmResultsJourney == null)
               realmResultsJourney = realm.where(Journey.class).equalTo("id", id).findFirst();
               email = realmResultsJourney.getEmail();
               Intent myIntent = new Intent(getApplicationContext(), MyJourneyList.class);

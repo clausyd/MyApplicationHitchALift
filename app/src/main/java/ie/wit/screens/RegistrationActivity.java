@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import io.realm.Realm;
 import models.Person;
+import models.UserCradentials;
 
 public class RegistrationActivity extends Home_Screen_Activity {
 
@@ -22,10 +23,11 @@ public class RegistrationActivity extends Home_Screen_Activity {
      EditText emailBox;
      EditText passwordBox;
      EditText rePasswordBox;
+     EditText dob;
      Button submmit;
 
 
-
+    String dateOFBirth;
     String firstName;
     String surname;
     String email;
@@ -58,10 +60,12 @@ public class RegistrationActivity extends Home_Screen_Activity {
         passwordBox = findViewById(R.id.password);
         rePasswordBox = findViewById(R.id.retypePassword);
         submmit = findViewById(R.id.submit);
+        dob = findViewById(R.id.dob);
 
         firstName = fNameBox.getText().toString();
         surname = lNameBox.getText().toString();
         email = emailBox.getText().toString();
+        dateOFBirth = dob.getText().toString();
         password = passwordBox.getText().toString();
         rePassword = rePasswordBox.getText().toString();
 
@@ -71,10 +75,14 @@ public class RegistrationActivity extends Home_Screen_Activity {
             if (password.equals(rePassword)) {
 
                     final Person cust = new Person();
+                    final UserCradentials u = new UserCradentials();
                     cust.setEmail(email);
                     cust.setFirstName(firstName);
                     cust.setSurname(surname);
-                    cust.setPassword(password);
+                    cust.setDOB(dateOFBirth);
+                    u.setEmail(email);
+                    u.setPassword(password);
+                    myApp.dbManager.add(u);
                     myApp.dbManager.add(cust);
 
                     Toast.makeText(getApplicationContext(), "Account Setup is Complete", Toast.LENGTH_LONG).show();

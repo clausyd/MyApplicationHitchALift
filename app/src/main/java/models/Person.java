@@ -19,7 +19,7 @@ public class Person extends RealmObject implements Serializable {
     private String email;
     private String firstName;
     public String surname;
-    public String password;
+    public String dob;
     //private RealmList<Car> carDetails;
 
 
@@ -35,8 +35,8 @@ public class Person extends RealmObject implements Serializable {
         return surname;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDOB() {
+        return dob;
     }
 
 
@@ -57,8 +57,8 @@ public class Person extends RealmObject implements Serializable {
         this.surname = surname;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDOB(String dob) {
+        this.dob = dob;
     }
 
 

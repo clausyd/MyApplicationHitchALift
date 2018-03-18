@@ -25,7 +25,7 @@ import io.realm.RealmResults;
 import models.Journey;
 import models.Person;
 
-public class MainActivity extends Home_Screen_Activity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends Login_ChoiceActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private EditText dateSelector;
     TextView nameBox;
@@ -49,21 +49,12 @@ public class MainActivity extends Home_Screen_Activity implements NavigationView
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        autoCompleteTextViewUserFrom = findViewById(R.id.autoCompleteTextVieUserFrom);
-        autoCompleteTextViewUserTo = findViewById(R.id.autoCompleteTextVieUserTo);
-        Country_Names = getResources().getStringArray(R.array.country);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,Country_Names);
-        autoCompleteTextViewUserFrom.setAdapter(adapter);
-        autoCompleteTextViewUserTo.setAdapter(adapter);
-        dateSelector = findViewById(R.id.dateSelector);
+
         Intent intent = getIntent();
         email  =  intent.getStringExtra("Email");
         loginEmail = intent.getStringExtra("loginEmail");
         emailJourney = intent.getStringExtra("emailJourney");
         homeEmail = intent.getStringExtra("homeEmail");
-
-
-        addJourney = findViewById(R.id.addJounrey);
         nameBox = findViewById(R.id.name);
 
         if(email != null){
@@ -77,50 +68,14 @@ public class MainActivity extends Home_Screen_Activity implements NavigationView
         }
 
 
-
-
         addJourney.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                name = nameBox.getText().toString();
-                journeyForm = autoCompleteTextViewUserFrom.getText().toString();
-                journeyTo = autoCompleteTextViewUserTo.getText().toString();
-                date = dateSelector.getText().toString();
-                boolean ifJourneyAdded;
-//Realm.io. (2018). Realm: Create reactive mobile apps in a fraction of the time. [online] Available at: https://realm.io/docs/java/latest/ [Accessed 1 Mar. 2018].
-                if(autoCompleteTextViewUserTo.getText().toString().trim().length() >0 && autoCompleteTextViewUserFrom.getText().toString().trim().length() >0
-                        && dateSelector.getText().toString().trim().length() >0) {
-                    Realm realm = Realm.getDefaultInstance();
-                    try {
-                        final Journey journey = new Journey();
-                        journey.setEmail(name);
-                        journey.setStartCounty(journeyForm);
-                        journey.setFinishCounty(journeyTo);
-                        journey.setDate(String.valueOf(date));
-                        realm.executeTransaction(new Realm.Transaction() {
-                            @Override
-                            public void execute(Realm realm) {
-                                try{
-                                    realm.copyToRealm(journey);
-                                    Toast.makeText(getApplicationContext(), "Journey Added", Toast.LENGTH_LONG).show();
-
-                                }catch(Exception e){
-                                    Toast.makeText(getApplicationContext(), "Journey Already Exists", Toast.LENGTH_LONG).show();
-
-                                }
-                            }
-                        });
-
-                    }finally {
-                        realm.close();
-                    }
-
-                }else {
-                    Toast.makeText(getApplicationContext(), "Enter Journey", Toast.LENGTH_LONG).show();
-                }
+             returnUpdatedJourney();
             }
         });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -156,21 +111,13 @@ public class MainActivity extends Home_Screen_Activity implements NavigationView
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            Realm realm = Realm.getDefaultInstance();
-            RealmResults<Person> results = realm.where(Person.class)
-                    .equalTo("email", loginEmail).findAll();
-            realm.beginTransaction();
+            RealmResults<Person> results = myApp.dbManager.deleteUserAccount(loginEmail);
             if(!results.isEmpty()){
-                results.deleteAllFromRealm();
-                realm.commitTransaction();
-                realm.close();
                 Toast.makeText(getApplicationContext(), "Account Removed ", Toast.LENGTH_SHORT).show();
                 Intent myIntent = new Intent(getApplicationContext(), Home_Screen_Activity.class);
                 startActivityForResult(myIntent, 0);
-
             }else{
                 Toast.makeText(getApplicationContext(), "Error Removing Account ", Toast.LENGTH_SHORT).show();
-
             }
             return true;
         }else if(id == R.id.my_journeys){
@@ -210,5 +157,35 @@ public class MainActivity extends Home_Screen_Activity implements NavigationView
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public void returnUpdatedJourney(){
+        addJourney = findViewById(R.id.addJounrey);
+        autoCompleteTextViewUserFrom = findViewById(R.id.autoCompleteTextVieUserFrom);
+        autoCompleteTextViewUserTo = findViewById(R.id.autoCompleteTextVieUserTo);
+        Country_Names = getResources().getStringArray(R.array.country);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,Country_Names);
+        autoCompleteTextViewUserFrom.setAdapter(adapter);
+        autoCompleteTextViewUserTo.setAdapter(adapter);
+        dateSelector = findViewById(R.id.dateSelector);
+
+        name = nameBox.getText().toString();
+        journeyForm = autoCompleteTextViewUserFrom.getText().toString();
+        journeyTo = autoCompleteTextViewUserTo.getText().toString();
+        date = dateSelector.getText().toString();
+
+//Realm.io. (2018). Realm: Create reactive mobile apps in a fraction of the time. [online] Available at: https://realm.io/docs/java/latest/ [Accessed 1 Mar. 2018].
+        if(autoCompleteTextViewUserTo.getText().toString().trim().length() >0 && autoCompleteTextViewUserFrom.getText().toString().trim().length() >0
+                && dateSelector.getText().toString().trim().length() >0) {
+            final Journey journey = new Journey();
+            journey.setEmail(name);
+            journey.setStartCounty(journeyForm);
+            journey.setFinishCounty(journeyTo);
+            journey.setDate(String.valueOf(date));
+            myApp.dbManager.add(journey);
+        }else {
+            Toast.makeText(getApplicationContext(), "Enter Journey", Toast.LENGTH_LONG).show();
+        }
     }
 }
