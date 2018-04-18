@@ -40,6 +40,7 @@ public class Update_JourneyActivity extends MyJourneyList {
         Intent intent;
         intent = getIntent();
         id = intent.getStringExtra("PersonID");
+        //email = intent.getStringExtra("Email");
         Realm.init(getApplicationContext());
         realm = Realm.getDefaultInstance();
 

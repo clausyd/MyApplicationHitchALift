@@ -14,13 +14,23 @@ import io.realm.RealmConfiguration;
 public class MyApp extends Application{
 
     public DBManager dbManager;
+    public String email;
+
+    public void searchEmail(String email){
+        this.email = email;
+
+    }
+
+    public String getEmail(){
+        return email;
+    }
 
     @Override
     public void onCreate() {
 
         {
             super.onCreate();
-            Log.v("Donate", "Donation App Started");
+            Log.v("HitchALift", "Hitch A Lift App Started");
             dbManager = new DBManager(this);
             dbManager.open();
             Log.d("HitchALift2.realm", "Realm Database Created & Opened");

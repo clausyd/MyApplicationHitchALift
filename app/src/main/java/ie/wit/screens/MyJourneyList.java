@@ -12,7 +12,6 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import customAdapters.JourneyAdapter;
-import io.realm.Realm;
 import io.realm.RealmResults;
 import models.Journey;
 
@@ -20,7 +19,6 @@ import models.Journey;
 public class MyJourneyList extends MainActivity {
     SwipeMenuListView listView;
     String email, journeyEmail;
-    Realm realm;
     RealmResults<Journey> journeys;
     JourneyAdapter adapter;
     Journey j;
@@ -31,9 +29,7 @@ public class MyJourneyList extends MainActivity {
         listView = findViewById(R.id.myjourneys_listView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent intent = getIntent();
-        email  =  intent.getStringExtra("emailJourney");
-        journeyEmail = intent.getStringExtra("journeyEmail");
+        email = myApp.getEmail();
         journeys = myApp.dbManager.getUserJourneys(email,journeyEmail);
         adapter = new JourneyAdapter(getApplicationContext(), journeys);
         listView.setAdapter(adapter);
@@ -92,7 +88,7 @@ public class MyJourneyList extends MainActivity {
                         String from = j.getStartCounty();
                         String to =  j.getFinishCounty();
                         myApp.dbManager.deleteJourneyList(email,from,to);
-                        journeys = realm.where(Journey.class).equalTo("email", email).findAllAsync();
+                        //journeys = realm.where(Journey.class).equalTo("email", email).findAllAsync();
                         if(listView.getAdapter().isEmpty()){
 
                             listView.setAdapter(adapter);
@@ -131,7 +127,6 @@ public class MyJourneyList extends MainActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.journey_list) {
             Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-            myIntent.putExtra("homeEmail",email);
             startActivityForResult(myIntent, 0);
 
 

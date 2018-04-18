@@ -2,6 +2,7 @@ package ie.wit.screens;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +14,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 import java.io.Serializable;
 import java.security.AccessController;
@@ -36,6 +43,7 @@ public class Home_Screen_Activity extends AppCompatActivity {
     AutoCompleteTextView autoCompleteTextView1;
     AutoCompleteTextView autoCompleteTextView2;
     EditText dateSelector;
+    ListView listView;
     String [] Country_Names;
     int day, month, year;
     public MyApp myApp;
@@ -63,6 +71,9 @@ public class Home_Screen_Activity extends AppCompatActivity {
         autoCompleteTextView2.setAdapter(adapter);
         search = findViewById(R.id.search);
         loginSignUp = findViewById(R.id.loginSignUp);
+
+
+
 
 
         search.setOnClickListener(new View.OnClickListener() {

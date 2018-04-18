@@ -31,12 +31,12 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
     TextView nameBox;
     String loginEmail;
     String journeyForm;
-    String homeEmail;
+    String carEmail;
     String journeyTo;
     String date;
     String name;
     String email;
-    String emailJourney;
+    String journeyEmail;
     Button addJourney;
     AutoCompleteTextView autoCompleteTextViewUserFrom;
     AutoCompleteTextView autoCompleteTextViewUserTo;
@@ -49,25 +49,18 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         addJourney = findViewById(R.id.addJounrey);
+        autoCompleteTextViewUserFrom = findViewById(R.id.autoCompleteTextVieUserFrom);
+        autoCompleteTextViewUserTo = findViewById(R.id.autoCompleteTextVieUserTo);
+        Country_Names = getResources().getStringArray(R.array.country);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,Country_Names);
+        autoCompleteTextViewUserFrom.setAdapter(adapter);
+        autoCompleteTextViewUserTo.setAdapter(adapter);
 
 
-        Intent intent = getIntent();
-        email  =  intent.getStringExtra("Email");
-        loginEmail = intent.getStringExtra("loginEmail");
-        emailJourney = intent.getStringExtra("emailJourney");
-        homeEmail = intent.getStringExtra("homeEmail");
+
+        email  = myApp.getEmail();
         nameBox = findViewById(R.id.name);
-
-        if(email != null){
-            nameBox.setText(email);
-        }else if(loginEmail != null){
-            nameBox.setText(loginEmail);
-        }else if(emailJourney != null){
-            nameBox.setText(emailJourney);
-        }else{
-            nameBox.setText(homeEmail);
-        }
-
+        nameBox.setText(email);
 
         addJourney.setOnClickListener(new View.OnClickListener() {
 
@@ -124,7 +117,7 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
         }else if(id == R.id.my_journeys){
 
             Intent myIntent = new Intent(getApplicationContext(),MyJourneyList.class);
-            myIntent.putExtra("emailJourney", loginEmail);
+            myIntent.putExtra("emailJourney", email);
             startActivityForResult(myIntent, 0);
 
         }else if(id == R.id.logOut){
@@ -143,17 +136,17 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.addCar) {
+            Intent myIntent = new Intent(getApplicationContext(), AddCarActivity.class);
+            myIntent.putExtra("carEmail", email);
+            startActivityForResult(myIntent, 0);
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_emailActivation) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -163,12 +156,7 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
 
     public void returnUpdatedJourney(){
 
-        autoCompleteTextViewUserFrom = findViewById(R.id.autoCompleteTextVieUserFrom);
-        autoCompleteTextViewUserTo = findViewById(R.id.autoCompleteTextVieUserTo);
-        Country_Names = getResources().getStringArray(R.array.country);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,Country_Names);
-        autoCompleteTextViewUserFrom.setAdapter(adapter);
-        autoCompleteTextViewUserTo.setAdapter(adapter);
+
         dateSelector = findViewById(R.id.dateSelector);
 
         name = nameBox.getText().toString();

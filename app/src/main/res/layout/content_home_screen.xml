@@ -102,15 +102,17 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:hint="To"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textColorHighlight="@android:color/holo_blue_dark"
+        android:hint="From"
+        android:textColorLink="@android:color/holo_blue_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.643" />
+        app:layout_constraintVertical_bias="0.659" />
+
+
+
 
     <EditText
         android:id="@+id/dateSelectorHomePage"
@@ -154,7 +156,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.942" />
 
-
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:text="Destinations"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="324dp" />
 
 
 </android.support.constraint.ConstraintLayout>

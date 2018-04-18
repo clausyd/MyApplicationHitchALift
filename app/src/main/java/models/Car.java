@@ -2,11 +2,13 @@ package models;
 
 import java.util.UUID;
 
+import io.realm.RealmObject;
+
 /**
  * Created by clausyd on 14/03/18.
  */
 
-public class Car {
+public class Car extends RealmObject {
 
     String carId = UUID.randomUUID().toString();
     String reg;

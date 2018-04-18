@@ -11,12 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import io.realm.Case;
-import io.realm.Realm;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import models.Person;
 
@@ -52,8 +47,9 @@ public class LoginActivity extends Home_Screen_Activity{
                         if (realmResults.isEmpty()) {
                             Toast.makeText(getApplicationContext(), "Password or Email Does Not Exist", Toast.LENGTH_SHORT).show();
                         } else {
+                            myApp.searchEmail(email);
                             Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-                            myIntent.putExtra("loginEmail", email);
+                            //myIntent.putExtra("loginEmail", email);
                             startActivityForResult(myIntent, 0);
                         }
 

@@ -83,6 +83,7 @@ public class RegistrationActivity extends Login_ChoiceActivity {
                     cust.setDOB(dateOFBirth);
                     u.setEmail(email);
                     u.setPassword(password);
+                    myApp.searchEmail(email);
                     myApp.dbManager.add(u);
                     myApp.dbManager.add(cust);
 

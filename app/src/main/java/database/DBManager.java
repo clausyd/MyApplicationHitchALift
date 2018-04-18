@@ -11,7 +11,9 @@ import customAdapters.JourneyAdapter;
 import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmModel;
 import io.realm.RealmResults;
+import models.Car;
 import models.Journey;
 import models.Person;
 import models.UserCradentials;
@@ -31,8 +33,8 @@ public class DBManager {
     public DBManager(Context context) {
 
         Realm.init(context);
-        RealmConfiguration config2 = new RealmConfiguration.Builder().name("HitchALift2.realm").build();
-        Realm.setDefaultConfiguration(config2);
+        RealmConfiguration config3 = new RealmConfiguration.Builder().name("HitchALift.realm").build();
+        Realm.setDefaultConfiguration(config3);
         realmDatabase = Realm.getDefaultInstance();
 
 
@@ -45,6 +47,10 @@ public class DBManager {
     public void close() {
         realmDatabase.close();
     }
+
+
+
+
 
     public void add(Journey j) {
         try {
@@ -74,6 +80,13 @@ public class DBManager {
             realmDatabase.beginTransaction();
             realmDatabase.copyToRealm(u);
             realmDatabase.commitTransaction();
+    }
+
+    public void add(Car car) {
+
+        realmDatabase.beginTransaction();
+        realmDatabase.copyToRealm( car);
+        realmDatabase.commitTransaction();
     }
 
     public Journey updateJourney(String id, String updateJourneyFrom, String updateJourneyTo, String updateJourneyDate) {
