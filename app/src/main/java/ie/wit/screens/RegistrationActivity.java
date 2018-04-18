@@ -1,5 +1,6 @@
 package ie.wit.screens;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import datePicker.DatePickerFragment;
 import io.realm.Realm;
 import models.Person;
 import models.UserCradentials;
@@ -41,7 +43,20 @@ public class RegistrationActivity extends Login_ChoiceActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         submmit = findViewById(R.id.submit);
+        fNameBox = findViewById(R.id.firstName);
+        lNameBox = findViewById(R.id.surname);
+        emailBox = findViewById(R.id.email);
+        passwordBox = findViewById(R.id.password);
+        rePasswordBox = findViewById(R.id.retypePassword);
+        dob = findViewById(R.id.dob);
 
+        dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getFragmentManager(),"Date Picker");
+            }
+        });
 
         submmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,12 +71,6 @@ public class RegistrationActivity extends Login_ChoiceActivity {
 
 
     public void addCustomer() {
-        fNameBox = findViewById(R.id.firstName);
-        lNameBox = findViewById(R.id.surname);
-        emailBox = findViewById(R.id.email);
-        passwordBox = findViewById(R.id.password);
-        rePasswordBox = findViewById(R.id.retypePassword);
-        dob = findViewById(R.id.dob);
 
         firstName = fNameBox.getText().toString();
         surname = lNameBox.getText().toString();

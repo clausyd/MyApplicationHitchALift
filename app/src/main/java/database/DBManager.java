@@ -76,17 +76,27 @@ public class DBManager {
     }
 
     public void add(UserCradentials u) {
-
+           try{
             realmDatabase.beginTransaction();
             realmDatabase.copyToRealm(u);
             realmDatabase.commitTransaction();
+        Toast.makeText(getApplicationContext(), "Journey Added", Toast.LENGTH_LONG).show();
+
+    } catch (Exception e) {
+        Toast.makeText(getApplicationContext(), "Journey Already Exists", Toast.LENGTH_LONG).show();
+    }
     }
 
     public void add(Car car) {
-
+    try{
         realmDatabase.beginTransaction();
         realmDatabase.copyToRealm( car);
         realmDatabase.commitTransaction();
+        Toast.makeText(getApplicationContext(), "Car Added", Toast.LENGTH_LONG).show();
+
+    } catch (Exception e) {
+        Toast.makeText(getApplicationContext(), "Car Already Exists", Toast.LENGTH_LONG).show();
+    }
     }
 
     public Journey updateJourney(String id, String updateJourneyFrom, String updateJourneyTo, String updateJourneyDate) {

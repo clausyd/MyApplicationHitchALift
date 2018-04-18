@@ -1,6 +1,7 @@
 package ie.wit.screens;
 
 import android.app.DatePickerDialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import datePicker.DatePickerFragment;
 import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -71,6 +73,14 @@ public class Home_Screen_Activity extends AppCompatActivity {
         autoCompleteTextView2.setAdapter(adapter);
         search = findViewById(R.id.search);
         loginSignUp = findViewById(R.id.loginSignUp);
+
+        dateSelector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getFragmentManager(),"Date Picker");
+            }
+        });
 
 
 

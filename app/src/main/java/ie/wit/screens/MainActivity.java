@@ -1,5 +1,6 @@
 package ie.wit.screens;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import datePicker.DatePickerFragment;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import models.Journey;
@@ -55,6 +57,7 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,Country_Names);
         autoCompleteTextViewUserFrom.setAdapter(adapter);
         autoCompleteTextViewUserTo.setAdapter(adapter);
+        dateSelector = findViewById(R.id.dateSelector);
 
 
 
@@ -67,6 +70,14 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
             @Override
             public void onClick(View view) {
              returnUpdatedJourney();
+            }
+        });
+
+        dateSelector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getFragmentManager(),"Date Picker");
             }
         });
 
@@ -157,7 +168,6 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
     public void returnUpdatedJourney(){
 
 
-        dateSelector = findViewById(R.id.dateSelector);
 
         name = nameBox.getText().toString();
         journeyForm = autoCompleteTextViewUserFrom.getText().toString();
