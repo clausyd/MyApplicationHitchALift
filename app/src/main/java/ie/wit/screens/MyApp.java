@@ -3,6 +3,8 @@ package ie.wit.screens;
 import android.app.Application;
 import android.util.Log;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 import database.DBManager;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -15,10 +17,19 @@ public class MyApp extends Application{
 
     public DBManager dbManager;
     public String email;
+    GoogleSignInAccount account;
 
     public void searchEmail(String email){
         this.email = email;
 
+    }
+
+    public void setGoogleAccount(GoogleSignInAccount account){
+        this.account = account;
+    }
+
+    public GoogleSignInAccount returnGoogleAccount(){
+        return account;
     }
 
     public String getEmail(){

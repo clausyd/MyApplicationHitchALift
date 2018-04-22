@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Hitch A Lift</string>
     <string name="action_settings">Delete Account</string>
     <string name="title_activity_registration">Hitch A Lift</string>
@@ -88,9 +88,9 @@
         completions."
     </string>
     <string name="title_activity_main">MainActivity</string>
-
+    <string name="server_client_id">666809066019-dk1p4qi4gosv1bdc28ib02uv5ubttfn9.apps.googleusercontent.com</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="server_client_id">666809066019-3btb5jimidlq0e2896e34ogb156cppeq.apps.googleusercontent.com</string>
+    <string name="title_activity_driver__details">Driver Details</string>
 
 </resources>

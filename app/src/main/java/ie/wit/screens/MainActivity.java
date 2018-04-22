@@ -2,6 +2,8 @@ package ie.wit.screens;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,8 +20,11 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import datePicker.DatePickerFragment;
 import io.realm.Realm;
@@ -33,17 +38,18 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
     TextView nameBox;
     String loginEmail;
     String journeyForm;
-    String carEmail;
     String journeyTo;
     String date;
     String name;
     String email;
-    String journeyEmail;
     Button addJourney;
     AutoCompleteTextView autoCompleteTextViewUserFrom;
     AutoCompleteTextView autoCompleteTextViewUserTo;
     String [] Country_Names;
-    Realm realm = Realm.getDefaultInstance();
+    GoogleSignInAccount account;
+    String googleEmial;
+    Uri myPic;
+    String googleName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,12 +64,22 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
         autoCompleteTextViewUserFrom.setAdapter(adapter);
         autoCompleteTextViewUserTo.setAdapter(adapter);
         dateSelector = findViewById(R.id.dateSelector);
-
-
-
+        account = myApp.returnGoogleAccount();
+        if(account !=null) {
+            googleEmial = account.getEmail();
+            googleName = account.getDisplayName();
+            myPic = account.getPhotoUrl();
+        }
         email  = myApp.getEmail();
+
         nameBox = findViewById(R.id.name);
-        nameBox.setText(email);
+        if(email != null){
+            nameBox.setText(email);
+
+        }else{
+            nameBox.setText(googleEmial);
+
+        }
 
         addJourney.setOnClickListener(new View.OnClickListener() {
 
@@ -89,6 +105,11 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView myName =navigationView.getHeaderView(0).findViewById(R.id.myName);
+        ImageView myPicBox =navigationView.getHeaderView(0).findViewById(R.id.myPic);
+        myName.setText(googleName);
+        myPicBox.setImageURI(myPic);
+
     }
 
     @Override

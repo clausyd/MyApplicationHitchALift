@@ -2,16 +2,12 @@ package database;
 
 import android.content.Context;
 import android.database.SQLException;
-import android.widget.ListView;
 import android.widget.Toast;
-
-import java.util.List;
 
 import customAdapters.JourneyAdapter;
 import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import io.realm.RealmModel;
 import io.realm.RealmResults;
 import models.Car;
 import models.Journey;
@@ -154,17 +150,13 @@ public class DBManager {
         return adapter;
     }
 
-    public RealmResults<Journey> getUserJourneys(String email, String journeyEmail) {
-        if (email != null) {
+    public JourneyAdapter getUserJourneys(String email) {
+
             realmResultsJourney = realmDatabase.where(Journey.class)
                     .equalTo("email", email, Case.INSENSITIVE).findAll();
-            return realmResultsJourney;
+            adapter = new JourneyAdapter(getApplicationContext(), realmResultsJourney);
+            return adapter;
 
-        } else {
-            realmResultsJourney = realmDatabase.where(Journey.class)
-                    .equalTo("email", journeyEmail, Case.INSENSITIVE).findAll();
-            return realmResultsJourney;
-        }
     }
 
     public Journey get(String id) {

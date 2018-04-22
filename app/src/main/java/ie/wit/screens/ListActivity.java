@@ -1,6 +1,7 @@
 package ie.wit.screens;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import customAdapters.JourneyAdapter;
@@ -34,8 +36,20 @@ public class ListActivity extends Home_Screen_Activity {
         String to = bundle.getString("To");
         String date = bundle.getString("Date");
 
-        JourneyAdapter adapter = myApp.dbManager.getJourenys(from,to,date);
+        final JourneyAdapter adapter = myApp.dbManager.getJourenys(from,to,date);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Journey j = (Journey) listView.getAdapter().getItem(1);
+                String custEmail = j.getEmail();
+                Intent myIntent = new Intent(getApplicationContext(), Update_JourneyActivity.class);
+                myIntent.putExtra("custEmail",custEmail );
+                startActivityForResult(myIntent, 0);
+
+            }
+        });
 
     }
     @Override

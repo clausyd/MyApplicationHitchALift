@@ -11,6 +11,8 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 import customAdapters.JourneyAdapter;
 import io.realm.RealmResults;
 import models.Journey;
@@ -18,10 +20,13 @@ import models.Journey;
 
 public class MyJourneyList extends MainActivity {
     SwipeMenuListView listView;
-    String email, journeyEmail;
+    String email;
     RealmResults<Journey> journeys;
     JourneyAdapter adapter;
     Journey j;
+    String googleMail;
+    GoogleSignInAccount googleAccount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +35,17 @@ public class MyJourneyList extends MainActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         email = myApp.getEmail();
-        journeys = myApp.dbManager.getUserJourneys(email,journeyEmail);
-        adapter = new JourneyAdapter(getApplicationContext(), journeys);
-        listView.setAdapter(adapter);
+        googleAccount = myApp.returnGoogleAccount();
+        if(googleAccount !=null) {
+            googleMail = googleAccount.getEmail();
+        }
+        if(email !=  null) {
+            JourneyAdapter adapter = myApp.dbManager.getUserJourneys(email);
+            listView.setAdapter(adapter);
+        }else if(googleMail != null){
+            JourneyAdapter adapter = myApp.dbManager.getUserJourneys(googleMail);
+            listView.setAdapter(adapter);
+        }
 
 
 

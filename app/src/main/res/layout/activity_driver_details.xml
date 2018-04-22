@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.wit.screens.Login_ChoiceActivity">
-
-
+    tools:context="ie.wit.screens.Driver_Details">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,16 +18,9 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-
-
-
     </android.support.design.widget.AppBarLayout>
 
-
-    <include
-        layout="@layout/content_login_choice"
-        app:layout_anchor="@+id/googleSignin"
-        app:layout_anchorGravity="right|center" />
+    <include layout="@layout/content_driver__details" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
