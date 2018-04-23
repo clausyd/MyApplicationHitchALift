@@ -42,9 +42,9 @@ public class ListActivity extends Home_Screen_Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Journey j = (Journey) listView.getAdapter().getItem(1);
+                Journey j = (Journey) listView.getAdapter().getItem(i);
                 String custEmail = j.getEmail();
-                Intent myIntent = new Intent(getApplicationContext(), Update_JourneyActivity.class);
+                Intent myIntent = new Intent(getApplicationContext(), Driver_Details.class);
                 myIntent.putExtra("custEmail",custEmail );
                 startActivityForResult(myIntent, 0);
 

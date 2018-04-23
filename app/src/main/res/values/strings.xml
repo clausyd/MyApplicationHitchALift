@@ -8,6 +8,10 @@
     <string name="title_activity_home__screen_">Hitch A Lift</string>
     <string name="title_activity_journey__list">Hitch A Lift</string>
 
+
+        <string name="compose_email">Compose Email</string>
+
+
     <string name="signed_in_fmt">Signed in as: %s</string>
     <string name="signed_in">Signed in</string>
     <string name="signing_in">Signing in…</string>
@@ -92,5 +96,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_driver__details">Driver Details</string>
+    <string name="title_activity_email">EmailActivity</string>
 
 </resources>

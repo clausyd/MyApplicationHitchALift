@@ -11,11 +11,15 @@ import io.realm.RealmObject;
 public class Car extends RealmObject {
 
     String carId = UUID.randomUUID().toString();
+    String email;
     String reg;
     String make;
     String model;
 
     public Car(){};
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public void setCarId(String carId) {
         this.carId = carId;

@@ -17,6 +17,8 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
 
+import models.Person;
+
 
 public class Login_ChoiceActivity extends Home_Screen_Activity{
 
@@ -91,7 +93,6 @@ public class Login_ChoiceActivity extends Home_Screen_Activity{
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
             myApp.setGoogleAccount(account);
             Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
             startActivityForResult(myIntent, 0);

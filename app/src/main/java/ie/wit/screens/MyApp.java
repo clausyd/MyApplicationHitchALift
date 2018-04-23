@@ -44,7 +44,7 @@ public class MyApp extends Application{
             Log.v("HitchALift", "Hitch A Lift App Started");
             dbManager = new DBManager(this);
             dbManager.open();
-            Log.d("HitchALift2.realm", "Realm Database Created & Opened");
+            Log.d("HitchALift.realm", "Realm Database Created & Opened");
 
 
         }

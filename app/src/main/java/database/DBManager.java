@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.SQLException;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 import customAdapters.JourneyAdapter;
 import io.realm.Case;
 import io.realm.Realm;
@@ -29,8 +31,8 @@ public class DBManager {
     public DBManager(Context context) {
 
         Realm.init(context);
-        RealmConfiguration config3 = new RealmConfiguration.Builder().name("HitchALift.realm").build();
-        Realm.setDefaultConfiguration(config3);
+        RealmConfiguration config4 = new RealmConfiguration.Builder().name("HitchALift4.realm").build();
+        Realm.setDefaultConfiguration(config4);
         realmDatabase = Realm.getDefaultInstance();
 
 
@@ -43,8 +45,6 @@ public class DBManager {
     public void close() {
         realmDatabase.close();
     }
-
-
 
 
 
@@ -72,27 +72,27 @@ public class DBManager {
     }
 
     public void add(UserCradentials u) {
-           try{
+        try {
             realmDatabase.beginTransaction();
             realmDatabase.copyToRealm(u);
             realmDatabase.commitTransaction();
-        Toast.makeText(getApplicationContext(), "Journey Added", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Journey Added", Toast.LENGTH_LONG).show();
 
-    } catch (Exception e) {
-        Toast.makeText(getApplicationContext(), "Journey Already Exists", Toast.LENGTH_LONG).show();
-    }
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Journey Already Exists", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void add(Car car) {
-    try{
-        realmDatabase.beginTransaction();
-        realmDatabase.copyToRealm( car);
-        realmDatabase.commitTransaction();
-        Toast.makeText(getApplicationContext(), "Car Added", Toast.LENGTH_LONG).show();
+        try {
+            realmDatabase.beginTransaction();
+            realmDatabase.copyToRealm(car);
+            realmDatabase.commitTransaction();
+            Toast.makeText(getApplicationContext(), "Car Added", Toast.LENGTH_LONG).show();
 
-    } catch (Exception e) {
-        Toast.makeText(getApplicationContext(), "Car Already Exists", Toast.LENGTH_LONG).show();
-    }
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Car Already Exists", Toast.LENGTH_LONG).show();
+        }
     }
 
     public Journey updateJourney(String id, String updateJourneyFrom, String updateJourneyTo, String updateJourneyDate) {
@@ -142,20 +142,16 @@ public class DBManager {
 
     public JourneyAdapter getJourenys(String from, String to, String date) {
 
-        realmResultsJourney = realmDatabase.where(Journey.class)
-                .equalTo("startCounty", from, Case.INSENSITIVE)
-                .equalTo("finishCounty", to, Case.INSENSITIVE)
-                .equalTo("date", date, Case.INSENSITIVE).findAll();
+        realmResultsJourney = realmDatabase.where(Journey.class).equalTo("startCounty", from, Case.INSENSITIVE).equalTo("finishCounty", to, Case.INSENSITIVE).equalTo("date", date, Case.INSENSITIVE).findAll();
         adapter = new JourneyAdapter(getApplicationContext(), realmResultsJourney);
         return adapter;
     }
 
     public JourneyAdapter getUserJourneys(String email) {
 
-            realmResultsJourney = realmDatabase.where(Journey.class)
-                    .equalTo("email", email, Case.INSENSITIVE).findAll();
-            adapter = new JourneyAdapter(getApplicationContext(), realmResultsJourney);
-            return adapter;
+        realmResultsJourney = realmDatabase.where(Journey.class).equalTo("email", email, Case.INSENSITIVE).findAll();
+        adapter = new JourneyAdapter(getApplicationContext(), realmResultsJourney);
+        return adapter;
 
     }
 
@@ -174,10 +170,23 @@ public class DBManager {
     public RealmResults<Person> deleteUserAccount(String loginEmail) {
 
         RealmResults<Person> results = realmDatabase.where(Person.class).equalTo("email", loginEmail).findAll();
-            realmDatabase.beginTransaction();
-            results.deleteAllFromRealm();
-            realmDatabase.commitTransaction();
+        realmDatabase.beginTransaction();
+        results.deleteAllFromRealm();
+        realmDatabase.commitTransaction();
 
         return results;
     }
+
+    public Person returnPerson(String driverEmail) {
+        Person results = realmDatabase.where(Person.class).equalTo("email", driverEmail).findFirst();
+        return results;
+
+    }
+
+    public Car returnCar(String driverEmail) {
+        Car results = realmDatabase.where(Car.class).equalTo("email", driverEmail).findFirst();
+        return results;
+    }
 }
+
+

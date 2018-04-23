@@ -49,7 +49,7 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
     GoogleSignInAccount account;
     String googleEmial;
     Uri myPic;
-    String googleName;
+    String firstName, lastName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +67,10 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
         account = myApp.returnGoogleAccount();
         if(account !=null) {
             googleEmial = account.getEmail();
-            googleName = account.getDisplayName();
+            firstName = account.getFamilyName();
             myPic = account.getPhotoUrl();
+            lastName = account.getGivenName();
+
         }
         email  = myApp.getEmail();
 
@@ -107,7 +109,7 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
         navigationView.setNavigationItemSelectedListener(this);
         TextView myName =navigationView.getHeaderView(0).findViewById(R.id.myName);
         ImageView myPicBox =navigationView.getHeaderView(0).findViewById(R.id.myPic);
-        myName.setText(googleName);
+        myName.setText(firstName + " "+ lastName);
         myPicBox.setImageURI(myPic);
 
     }

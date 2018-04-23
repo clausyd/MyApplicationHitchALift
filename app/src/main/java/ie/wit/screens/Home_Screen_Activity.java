@@ -79,6 +79,7 @@ public class Home_Screen_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 DialogFragment newFragment = new DatePickerFragment();
                 newFragment.show(getFragmentManager(),"Date Picker");
+
             }
         });
 
@@ -124,67 +125,18 @@ public class Home_Screen_Activity extends AppCompatActivity {
 
             if (autoCompleteTextView1.getText().toString().trim().length() > 0 && autoCompleteTextView2.getText().toString().trim().length() > 0 && dateSelector.getText().toString().trim().length() > 0) {
 
-                    Intent myIntent = new Intent(view.getContext(), ListActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("To", to);
-                    bundle.putString("Date", date);
-                    bundle.putString("From", from);
-                    myIntent.putExtras(bundle);
-                    startActivityForResult(myIntent, 0);
+                Intent myIntent = new Intent(view.getContext(), ListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("To", to);
+                bundle.putString("Date", date);
+                bundle.putString("From", from);
+                myIntent.putExtras(bundle);
+                startActivityForResult(myIntent, 0);
 
             } else {
                 Toast.makeText(getApplicationContext(), "Please Enter A Journey", Toast.LENGTH_LONG).show();
             }
         }
- public void addUserOnStart(){
-     Person p = new Person();
-     p.setFirstName("eoin");
-     p.setSurname("Dalton");
-     p.setEmail("c@gmail.com");
-     p.setDOB("05/12/1984");
-     myApp.dbManager.add(p);
-
-     UserCradentials u = new UserCradentials();
-     u.setEmail("c@gmail.com");
-     u.setPassword("1234");
-     myApp.dbManager.add(u);
-
-     Journey j = new Journey();
-     j.setStartCounty("Kilkenny");
-     j.setFinishCounty("Dublin");
-     j.setDate("2018");
-     myApp.dbManager.add(j);
-
-     Journey r = new Journey();
-     r.setStartCounty("Limrick");
-     r.setFinishCounty("Louth");
-     r.setDate("2018");
-     myApp.dbManager.add(r);
-
-     Person l = new Person();
-     p.setFirstName("John");
-     p.setSurname("Dalton");
-     p.setEmail("e@gmail.com");
-     p.setDOB("05/12/1995");
-     myApp.dbManager.add(p);
-
-     UserCradentials t = new UserCradentials();
-     u.setEmail("e@gmail.com");
-     u.setPassword("1235");
-     myApp.dbManager.add(u);
-
-     Journey o = new Journey();
-     o.setStartCounty("Kilkenny");
-     o.setFinishCounty("Dublin");
-     o.setDate("2018");
-     myApp.dbManager.add(o);
-
-     Journey h = new Journey();
-     h.setStartCounty("Limrick");
-     h.setFinishCounty("Louth");
-     h.setDate("2018");
-     myApp.dbManager.add(h);
- }
 
 
     }

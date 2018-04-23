@@ -38,15 +38,13 @@ public class MyJourneyList extends MainActivity {
         googleAccount = myApp.returnGoogleAccount();
         if(googleAccount !=null) {
             googleMail = googleAccount.getEmail();
+            JourneyAdapter adapter = myApp.dbManager.getUserJourneys(googleMail);
+            listView.setAdapter(adapter);
         }
         if(email !=  null) {
             JourneyAdapter adapter = myApp.dbManager.getUserJourneys(email);
             listView.setAdapter(adapter);
-        }else if(googleMail != null){
-            JourneyAdapter adapter = myApp.dbManager.getUserJourneys(googleMail);
-            listView.setAdapter(adapter);
         }
-
 
 
 

@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 import models.Car;
 
 public class AddCarActivity extends MainActivity {
@@ -26,6 +28,7 @@ public class AddCarActivity extends MainActivity {
     String model;
 
     Button addCar;
+    GoogleSignInAccount account;
 
     Car car = new Car();
 
@@ -39,7 +42,9 @@ public class AddCarActivity extends MainActivity {
         carMake = findViewById(R.id.carMake);
         carModel = findViewById(R.id.carModel);
         addCar = findViewById(R.id.addCar);
+        account = myApp.returnGoogleAccount();
         email = myApp.getEmail();
+
 
 
 
@@ -58,6 +63,11 @@ public class AddCarActivity extends MainActivity {
                     car.setReg(reg);
                     car.setMake(make);
                     car.setModel(model);
+                    if(account != null) {
+                        car.setEmail(account.getEmail());
+                    }else{
+                        car.setEmail(email);
+                    }
                     myApp.dbManager.add(car);
                     Toast.makeText(getApplicationContext(), "Car Added", Toast.LENGTH_LONG).show();
 

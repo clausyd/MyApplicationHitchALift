@@ -65,6 +65,10 @@
         <activity
             android:name=".Driver_Details"
             android:label="@string/title_activity_driver__details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EmailActivity"
+            android:label="@string/title_activity_email"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
