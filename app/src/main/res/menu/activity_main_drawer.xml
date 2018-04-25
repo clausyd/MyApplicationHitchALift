@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
@@ -10,10 +12,11 @@
             android:title="Import" />
         <item
             android:id="@+id/addCar"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_action_car"
             android:title="Add Car Detail" />
         <item
             android:id="@+id/nav_emailActivation"
+            android:icon="@drawable/ic_action_email"
             android:title="Varify Email" />
 
     </group>

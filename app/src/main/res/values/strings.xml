@@ -9,7 +9,7 @@
     <string name="title_activity_journey__list">Hitch A Lift</string>
 
 
-        <string name="compose_email">Compose Email</string>
+    <string name="compose_email">Compose Email</string>
 
 
     <string name="signed_in_fmt">Signed in as: %s</string>

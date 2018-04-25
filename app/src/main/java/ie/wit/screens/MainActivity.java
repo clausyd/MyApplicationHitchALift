@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.squareup.picasso.Picasso;
 
 import datePicker.DatePickerFragment;
 import io.realm.Realm;
@@ -68,7 +69,7 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
         if(account !=null) {
             googleEmial = account.getEmail();
             firstName = account.getFamilyName();
-            myPic = account.getPhotoUrl();
+             myPic = account.getPhotoUrl();
             lastName = account.getGivenName();
 
         }
@@ -108,21 +109,19 @@ public class MainActivity extends Login_ChoiceActivity implements NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         TextView myName =navigationView.getHeaderView(0).findViewById(R.id.myName);
+        TextView myEmail =navigationView.getHeaderView(0).findViewById(R.id.myEmail);
         ImageView myPicBox =navigationView.getHeaderView(0).findViewById(R.id.myPic);
         myName.setText(firstName + " "+ lastName);
+        myEmail.setText(googleEmial);
         myPicBox.setImageURI(myPic);
+        //Android, G. (2018). Get Google+ profile picture from Uri to Bitmap on Android. [online] Stackoverflow.com. Available at: https://stackoverflow.com/questions/36781830/get-google-profile-picture-from-uri-to-bitmap-on-android [Accessed 24 Apr. 2018].
+        Picasso.with(this)
+                .load(myPic)
+                .into(myPicBox)
+           ;
 
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
